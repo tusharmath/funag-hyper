@@ -13,5 +13,17 @@
     Funag
   </h1>
 </div>
+<script src="node_modules/systemjs/dist/system.js"></script>
+<script>
+  SystemJS.defaultJSExtensions = true;
+  SystemJS.config({
+    paths: {
+      '*': './node_modules/*',
+      'src/*': 'src/*'
+    },
+    packageConfigPaths: ['./node_modules/*/package.json']
+  })
+  SystemJS.import('src/app.js')
+</script>
 </body>
 </html>
