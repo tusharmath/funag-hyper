@@ -12,7 +12,7 @@
   margin: 0;
   padding: 16px;
   font-size: 1em;
-  height: 56px;
+  height: var(--button-height);
   border: none;
   background: none;
 }

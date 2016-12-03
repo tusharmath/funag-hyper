@@ -5,6 +5,7 @@
 
 :root {
   --main-bg-color: #E6E6E6;
+  --button-height: 56px;
 }
 
 html, body {

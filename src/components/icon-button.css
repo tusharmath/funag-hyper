@@ -1,6 +1,6 @@
 button.icon-button {
-  height: 56px;
-  width: 56px;
+  height: var(--button-height);
+  width: var(--button-height);
   border: 0;
   padding: 0;
   margin: 0;

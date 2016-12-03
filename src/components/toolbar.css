@@ -1,6 +1,6 @@
 .toolbar {
   background-color: var(--main-bg-color);
-  height: 56px;
+  height: var(--button-height);
   display: flex;
   flex-direction: row;
   align-items: center;
