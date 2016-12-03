@@ -3,5 +3,14 @@
  */
 
 import * as O from 'observable-air'
-import * as R from 'ramda'
-console.log('Hey Ya!', O, R)
+import * as t from './tasks'
+import {h} from './hyperscript'
+import * as toolbar from './components/toolbar'
+
+export function main () {
+  return O.of(t.dom(h('div.app', [
+    toolbar.view()
+  ])))
+}
+
+O.forEach(t => t.run(), main())
