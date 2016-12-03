@@ -6,6 +6,7 @@ import * as O from 'observable-air'
 import * as t from './tasks'
 import {h} from './hyperscript'
 import * as toolbar from './components/toolbar'
+import * as search from './components/toolbar-search'
 import {dispatcher, select} from './dispatcher'
 import {Model, IDispatcher} from './types'
 
@@ -14,7 +15,8 @@ const init = (): Model => ({
 })
 
 export const view = (d: IDispatcher, model: Model) => h('div.app', [
-  toolbar.view(d.of('toolbar'))
+  toolbar.view(d.of('toolbar')),
+  model.showSearch ? search.view(d) : ''
 ])
 
 export function update () {

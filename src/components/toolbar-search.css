@@ -1,0 +1,22 @@
+.toolbar-search {
+  position: fixed;
+  background-color: var(--main-bg-color);
+  width: 100%;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.toolbar-search input {
+  flex-grow: 1;
+  margin: 0;
+  padding: 16px;
+  font-size: 1em;
+  height: 56px;
+  border: none;
+  background: none;
+}
+
+.toolbar-search input:focus {
+  outline: none;
+}

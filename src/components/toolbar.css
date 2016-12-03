@@ -1,5 +1,5 @@
 .toolbar {
-  background-color: #E6E6E6;
+  background-color: var(--main-bg-color);
   height: 56px;
   display: flex;
   flex-direction: row;
