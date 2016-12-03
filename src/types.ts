@@ -27,7 +27,8 @@ export interface IDispatcher {
 }
 
 export interface Model {
-  showSearch: boolean
+  showSearch: boolean,
+  searchQuery: string
 }
 
 export interface Reducer {

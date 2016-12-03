@@ -4,7 +4,7 @@
 
 import * as O from 'observable-air'
 import * as R from 'ramda'
-import {h} from '../hyperscript'
+import {h} from '../lib'
 import * as iconButton from './icon-button'
 import {IDispatcher} from '../types'
 import {select} from '../dispatcher'

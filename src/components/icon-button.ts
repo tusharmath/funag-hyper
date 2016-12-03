@@ -2,7 +2,7 @@
  * Created by tushar on 03/12/16.
  */
 
-import {h} from '../hyperscript'
+import {h} from '../lib'
 import {IDispatcher} from '../types'
 
 export const view = (icon: string, d: IDispatcher) => {
