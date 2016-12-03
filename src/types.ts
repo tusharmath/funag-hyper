@@ -3,6 +3,7 @@
  */
 
 import {VNode} from 'snabbdom'
+import * as O from 'observable-air'
 
 export interface VNodeProps {
   style?: {[name: string]: string},
@@ -15,4 +16,18 @@ export interface Hyperscript {
   (type: string, children: Array<VNode|string>): VNode
   (type: string, props: VNodeProps): VNode
   (type: string): VNode
+}
+
+export interface IDispatcher {
+  listen<T>(val: T): void
+  of?(scope: string): IDispatcher
+  source<T>(): O.IObservable<T>
+}
+
+export interface Model {
+  showSearch: boolean
+}
+
+export interface Reducer {
+  (a: Model): Model
 }

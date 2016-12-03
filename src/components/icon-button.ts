@@ -3,9 +3,10 @@
  */
 
 import {h} from '../hyperscript'
+import {IDispatcher} from '../types'
 
-export const view = (icon: string) => {
-  return h('button.icon-button', [
+export const view = (icon: string, d: IDispatcher) => {
+  return h('button.icon-button', {on: {click: d.listen}}, [
     h('i.material-icons', [icon])
   ])
 }

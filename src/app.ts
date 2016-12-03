@@ -6,14 +6,29 @@ import * as O from 'observable-air'
 import * as t from './tasks'
 import {h} from './hyperscript'
 import * as toolbar from './components/toolbar'
+import {dispatcher, select} from './dispatcher'
+import {Model, IDispatcher} from './types'
 
-export function main () {
-  return O.of(t.dom(h('div.app', [
-    toolbar.view()
-  ])))
+const init = (): Model => ({
+  showSearch: false
+})
+
+export const view = (d: IDispatcher, model: Model) => h('div.app', [
+  toolbar.view(d.of('toolbar'))
+])
+
+export function update () {
+  const d = dispatcher('@root')
+  const root$ = select('@root')(d.source())
+  const toolbarReducer$ = toolbar.update(select('toolbar')(root$))
+  const model$ = O.merge(
+    O.scan((fn, m) => fn(m), init(), toolbarReducer$),
+    O.of(init())
+  )
+  return O.map(model => t.dom(view(d, model)), model$)
 }
 
-O.forEach(t => t.run(), main())
+O.forEach(t => t.run(), update())
 
 const body = document.body
 requestAnimationFrame(() => {
