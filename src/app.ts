@@ -16,15 +16,18 @@ const init = (): Model => ({
 
 export const view = (d: IDispatcher, model: Model) => h('div.app', [
   toolbar.view(d.of('toolbar')),
-  model.showSearch ? search.view(d) : ''
+  model.showSearch ? search.view(d.of('searchBar')) : ''
 ])
 
 export function update () {
   const d = dispatcher('@root')
   const root$ = select('@root')(d.source())
-  const toolbarReducer$ = toolbar.update(select('toolbar')(root$))
+  const reducer$ = O.merge(
+    toolbar.update(select('toolbar')(root$)),
+    search.update(select('searchBar')(root$))
+  )
   const model$ = O.merge(
-    O.scan((fn, m) => fn(m), init(), toolbarReducer$),
+    O.scan((fn, m) => fn(m), init(), reducer$),
     O.of(init())
   )
   return O.map(model => t.dom(view(d, model)), model$)
