@@ -8,6 +8,7 @@ import * as iconButton from './icon-button'
 export const view = () => {
   return h('div.toolbar', [
     iconButton.view('menu'),
-    h('span', ['Funag'])
+    h('div.flb-grow-1', ['Funag']),
+    iconButton.view('search')
   ])
 }
