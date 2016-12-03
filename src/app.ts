@@ -14,3 +14,8 @@ export function main () {
 }
 
 O.forEach(t => t.run(), main())
+
+const body = document.body
+requestAnimationFrame(() => {
+  body.style.opacity = '1'
+})
