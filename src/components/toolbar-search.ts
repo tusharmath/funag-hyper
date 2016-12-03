@@ -9,7 +9,7 @@ import {IDispatcher} from '../types'
 export const view = (d: IDispatcher) => {
   return h('div.toolbar-search', [
     icon.view('arrow_back', d.of('back')),
-    h('input', {props: {placeholder: 'Search'}}),
+    h('input', {props: {placeholder: 'Search', autofocus: true}}),
     icon.view('clear', d.of('clear'))
   ])
 }

@@ -6,7 +6,8 @@ import {VNode} from 'snabbdom'
 import * as O from 'observable-air'
 
 export interface VNodeProps {
-  props?: {[name: string]: string},
+  attrs?: {[name: string]: string},
+  props?: {[name: string]: any},
   style?: {[name: string]: string},
   on?: any
   'class'?: {[name: string]: boolean}
