@@ -2,16 +2,17 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border-bottom: 1px solid rgb(249, 246, 246);  
-  padding: 8px 16px;
+  border-bottom: 1px solid rgb(249, 246, 246);
+  padding: 8px;
   align-items: center;
 }
 
-.track-tile div:nth-child(1) {
+.track-tile div:nth-child(2) {
   flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  margin: 0 8px;
 }
 
 .track-tile .artist {
@@ -23,5 +24,4 @@
   color: rgb(172, 172, 172);
   font-weight: 100;
   text-align: right;
-  padding-left: 8px;
 }

@@ -1,0 +1,15 @@
+.artwork img {
+    height: 50px;
+    width: 50px;
+    overflow: hidden;
+}
+
+.artwork .placeholder {
+    color: rgb(172, 172, 172);
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F6F6F6
+}

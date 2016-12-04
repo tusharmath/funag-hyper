@@ -4,6 +4,7 @@
 @import "components/search-toolbar.css";
 @import "components/toolbar.css";
 @import "components/track-tile.css";
+@import "components/artwork.css";
 
 :root {
   --main-bg-color: #E6E6E6;
@@ -30,4 +31,10 @@ body {
 
 .app {
   margin-top: var(--button-height);
+}
+
+.overflow-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
