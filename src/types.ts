@@ -29,7 +29,8 @@ export interface IDispatcher {
 export interface Model {
   showSearch: boolean,
   searchQuery: string,
-  tracks: Array<Track>
+  tracks: Array<Track>,
+  selectedTrack: Track
 }
 
 export interface Task {

@@ -51,10 +51,13 @@ body {
 
 @keyframes bouncy-modal {
   0% {
-    transform: translateY(100%);
+    transform: translateY(-10%);
   }
-  80% {
-    transform: translateY(-15%);
+  50% {
+    transform: translateY(0%);
+  }
+  75% {
+    transform: translateY(25%);
   }
   100% {
     transform: translateY(0%);

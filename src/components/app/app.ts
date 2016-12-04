@@ -8,21 +8,23 @@ import {h} from '../../lib'
 import * as toolbar from '../app-toolbar/app-toolbar'
 import * as search from '../search-toolbar/search-toolbar'
 import * as trackTile from '../track-tile/track-tile'
+import * as modal from '../modal/modal'
 import {dispatcher, select} from '../../dispatcher'
 import {Model, IDispatcher, Task, Track} from '../../types'
 
 const init = (): Model => ({
   showSearch: false,
   searchQuery: '',
-  tracks: []
+  tracks: [],
+  selectedTrack: null
 })
 
 export const view = (d: IDispatcher, model: Model) => {
-  console.log(model)
   return h('div.app', [
     toolbar.view(d.of('toolbar')),
     model.showSearch ? search.view(d.of('searchBar')) : '',
-    h('div.tracks', model.tracks.map(track => trackTile.view(d.of('selectTrack'), track)))
+    h('div.tracks', model.tracks.map(track => trackTile.view(d.of('selectTrack'), track))),
+    model.selectedTrack ? modal.view(h('div', ['Hello'])) : ''
   ])
 }
 
