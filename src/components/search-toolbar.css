@@ -1,4 +1,4 @@
-.toolbar-search {
+.search-toolbar {
   position: fixed;
   background-color: var(--main-bg-color);
   width: 100%;
@@ -7,7 +7,7 @@
   flex-direction: row;
 }
 
-.toolbar-search input {
+.search-toolbar input {
   flex-grow: 1;
   margin: 0;
   padding: 16px;
@@ -17,6 +17,6 @@
   background: none;
 }
 
-.toolbar-search input:focus {
+.search-toolbar input:focus {
   outline: none;
 }

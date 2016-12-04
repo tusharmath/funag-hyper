@@ -1,7 +1,7 @@
-@import "components/toolbar.css";
+@import "components/app-toolbar.css";
 @import "components/flexbox.css";
 @import "components/icon-button.css";
-@import "components/toolbar-search.css";
+@import "components/search-toolbar.css";
 
 :root {
   --main-bg-color: #E6E6E6;
