@@ -6,6 +6,7 @@
 @import "../track-tile/track-tile.css";
 @import "../artwork/artwork.css";
 @import "../modal/modal.css";
+@import "../floating-button/floating-button.css";
 
 :root {
   --main-bg-color: #E6E6E6;

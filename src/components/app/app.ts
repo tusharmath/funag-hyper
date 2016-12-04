@@ -9,6 +9,7 @@ import * as toolbar from '../app-toolbar/app-toolbar'
 import * as search from '../search-toolbar/search-toolbar'
 import * as trackTile from '../track-tile/track-tile'
 import * as modal from '../modal/modal'
+import * as modalContent from '../track-modal-content/track-modal-content'
 import {dispatcher, select} from '../../dispatcher'
 import {Model, IDispatcher, Task, Track} from '../../types'
 
@@ -24,7 +25,7 @@ export const view = (d: IDispatcher, model: Model) => {
     toolbar.view(d.of('toolbar')),
     model.showSearch ? search.view(d.of('searchBar')) : '',
     h('div.tracks', model.tracks.map(track => trackTile.view(d.of('selectTrack'), track))),
-    model.selectedTrack ? modal.view(h('div', ['Hello'])) : ''
+    model.selectedTrack ? modal.view(modalContent.view()) : ''
   ])
 }
 

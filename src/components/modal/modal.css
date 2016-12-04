@@ -26,3 +26,10 @@
 .modal button.btn-block {
   text-transform: uppercase;
 }
+
+.modal .floating-button {
+  top: 0;
+  position: absolute;
+  right: 8px;
+  transform: translateY(-50%);
+}
