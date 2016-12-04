@@ -15,6 +15,7 @@
   --button-height: 56px;
   --placeholder-color: rgb(172, 172, 172);
   --placeholder-bg-color: #F6F6F6;
+  --border-color: rgb(249, 246, 246);
 }
 
 html, body {
@@ -26,7 +27,7 @@ html, body {
 
 body {
   font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   color: rgb(34, 34, 34);
   font-weight: 400;
 }

@@ -12,12 +12,17 @@ export const view = (track: Track) => {
     h('div.floating-button-container', [
       button.view('play_arrow')
     ]),
-    h('div.header', [
-      h('div', [
-        h('div.title', [track.title]),
-        h('div.artist', [track.user.username])
+    h('div.track-info', [
+      h('div.header', [
+        h('div', [
+          h('div.title', [track.title]),
+          h('div.artist', [track.user.username])
+        ])
+      ]),
+      h('div.menu-items', [
+        h('button', ['play']),
+        h('button', ['enqueue'])
       ])
-    ]),
-    h('div.menu-items', [])
+    ])
   ])
 }
