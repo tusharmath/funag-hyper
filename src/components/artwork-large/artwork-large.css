@@ -1,0 +1,28 @@
+.artwork-large {
+  --size: 250px;
+  height: var(--size);
+  width: 100%;
+  overflow: hidden;
+  /* display: flex; */
+  /* justify-content: center; */
+}
+
+.artwork-large .img-holder {
+  height: 100%;
+  background: no-repeat center center;
+  width: 100%;
+}
+
+.artwork-large .placeholder {
+  color: var(--placeholder-color);
+  background-color: var(--placeholder-bg-color);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.artwork-large .placeholder .material-icons {
+  font-size: 64px;
+}

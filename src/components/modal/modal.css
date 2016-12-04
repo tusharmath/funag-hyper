@@ -5,19 +5,16 @@
 .modal .content {
   position: fixed;
   bottom: 0;
-  height: 100px;
-  background-color: #FFF;
+  background-color: rgb(255, 255, 255);
   width: 100%;
-  box-shadow: 0px -8px 40px 0px rgba(0, 0, 0, 0.65);
-  padding: 8px;
+  box-shadow: 0px -1px 9px -2px rgb(0, 0, 0);
   animation: bouncy-modal 400ms linear;
-  color: #F00;
 }
 
 .modal .overlay {
   position: fixed;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.72));
   height: 100%;
   width: 100%;
   animation: fade-in 400ms linear;
@@ -32,4 +29,5 @@
   position: absolute;
   right: 8px;
   transform: translateY(-50%);
+};
 }

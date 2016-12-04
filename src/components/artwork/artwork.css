@@ -1,15 +1,22 @@
+.artwork {
+    --artwork-size: 50px;
+    height: var(--artwork-size);
+    height: var(--artwork-size);
+    overflow: hidden;
+}
+
 .artwork img {
-    height: 50px;
-    width: 50px;
+    height: var(--artwork-size);
+    width: var(--artwork-size);
     overflow: hidden;
 }
 
 .artwork .placeholder {
-    color: rgb(172, 172, 172);
-    height: 50px;
-    width: 50px;
+    color: var(--placeholder-color);
+    height: var(--artwork-size);
+    width: var(--artwork-size);
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #F6F6F6
+    background-color: var(--placeholder-bg-color);
 }
