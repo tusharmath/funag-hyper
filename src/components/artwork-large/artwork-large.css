@@ -15,12 +15,12 @@
 .artwork-large .placeholder {
   color: var(--placeholder-color);
   background-color: var(--placeholder-bg-color);
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: var(--size);
+  margin: auto;
 }
 
 .artwork-large .placeholder .material-icons {

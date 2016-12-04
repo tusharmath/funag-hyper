@@ -32,5 +32,5 @@
 }
 
 .modal.animate-out .content {
-  animation: swipe-out 300ms ease-in;
+  animation: swipe-out 300ms cubic-bezier(1, 0, 1, 1);
 }
