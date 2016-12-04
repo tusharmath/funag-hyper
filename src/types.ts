@@ -1,7 +1,6 @@
 /**
  * Created by tushar on 03/12/16.
  */
-
 import {VNode} from 'snabbdom'
 import * as O from 'observable-air'
 
@@ -10,6 +9,7 @@ export interface VNodeProps {
   props?: {[name: string]: any},
   style?: {[name: string]: string},
   on?: any
+  hook?: {[name: string]: Function}
   'class'?: {[name: string]: boolean}
 }
 

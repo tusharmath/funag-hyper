@@ -1,7 +1,3 @@
-.modal {
-
-}
-
 .modal .content {
   position: fixed;
   bottom: 0;
@@ -29,5 +25,12 @@
   position: absolute;
   right: 8px;
   transform: translateY(-50%);
-};
+}
+
+.modal.animate-out .overlay {
+  animation: fade-out 300ms linear;
+}
+
+.modal.animate-out .content {
+  animation: swipe-out 300ms ease-in;
 }
