@@ -1,12 +1,12 @@
 /**
  * Created by tushar on 04/12/16.
  */
-import {Track} from '../types'
-import {h, durationFormat} from '../lib'
-import * as artwork from './artwork'
+import {Track, IDispatcher} from '../../types'
+import {h, durationFormat} from '../../lib'
+import * as artwork from '../artwork/artwork'
 
-export const view = (track: Track) => {
-  return h('div.track-tile', [
+export const view = (d: IDispatcher, track: Track) => {
+  return h('div.track-tile', {on: {click: [d.listen, track]}}, [
     artwork.view(track.artwork_url),
     h('div', [
       h('div.title.overflow-ellipsis', [track.title]),

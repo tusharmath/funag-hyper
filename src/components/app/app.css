@@ -1,10 +1,10 @@
-@import "components/app-toolbar.css";
-@import "components/flexbox.css";
-@import "components/icon-button.css";
-@import "components/search-toolbar.css";
-@import "components/toolbar.css";
-@import "components/track-tile.css";
-@import "components/artwork.css";
+@import "../app-toolbar/app-toolbar.css";
+@import "../flexbox/flexbox.css";
+@import "../icon-button/icon-button.css";
+@import "../search-toolbar/search-toolbar.css";
+@import "../toolbar/toolbar.css";
+@import "../track-tile/track-tile.css";
+@import "../artwork/artwork.css";
 
 :root {
   --main-bg-color: #E6E6E6;

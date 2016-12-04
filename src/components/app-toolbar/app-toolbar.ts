@@ -4,10 +4,10 @@
 
 import * as O from 'observable-air'
 import * as R from 'ramda'
-import {h} from '../lib'
-import * as iconButton from './icon-button'
-import {IDispatcher} from '../types'
-import {select} from '../dispatcher'
+import {h} from '../../lib'
+import * as iconButton from '../icon-button/icon-button'
+import {IDispatcher} from '../../types'
+import {select} from '../../dispatcher'
 
 
 const showSearch = R.ifElse(

@@ -3,13 +3,13 @@
  */
 import * as O from 'observable-air'
 import * as R from 'ramda'
-import * as t from './tasks'
-import {h} from './lib'
-import * as toolbar from './components/app-toolbar'
-import * as search from './components/search-toolbar'
-import * as trackTile from './components/track-tile'
-import {dispatcher, select} from './dispatcher'
-import {Model, IDispatcher, Task, Track} from './types'
+import * as t from '../../tasks'
+import {h} from '../../lib'
+import * as toolbar from '../app-toolbar/app-toolbar'
+import * as search from '../search-toolbar/search-toolbar'
+import * as trackTile from '../track-tile/track-tile'
+import {dispatcher, select} from '../../dispatcher'
+import {Model, IDispatcher, Task, Track} from '../../types'
 
 const init = (): Model => ({
   showSearch: false,
@@ -18,10 +18,11 @@ const init = (): Model => ({
 })
 
 export const view = (d: IDispatcher, model: Model) => {
+  console.log(model)
   return h('div.app', [
     toolbar.view(d.of('toolbar')),
     model.showSearch ? search.view(d.of('searchBar')) : '',
-    h('div.tracks', model.tracks.map(trackTile.view))
+    h('div.tracks', model.tracks.map(track => trackTile.view(d.of('selectTrack'), track)))
   ])
 }
 
@@ -43,7 +44,11 @@ export function update () {
     O.map(
       R.assoc('tracks') as {(tracks: Track[]): {(m: Model): Model}},
       O.switchLatest(select('HTTP.tracks', root$))
-    ) as O.IObservable<{(m: Model): Model}>
+    ) as O.IObservable<{(m: Model): Model}>,
+    O.map(
+      R.assoc('selectedTrack') as {(track: Track): {(m: Model): Model}},
+      select('selectTrack', root$)
+    )
   )
   const getTracks = (q: string) => t.request(d.of('HTTP.tracks'), tracksURL(q))
   const model$ = O.merge(
