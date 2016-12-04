@@ -3,8 +3,9 @@
  */
 import {h} from '../../lib'
 import {VNode} from 'snabbdom'
+import {IDispatcher} from '../../types'
 
-export const view = (content: VNode) => h('div.modal', [
-  h('div.overlay'),
+export const view = (d: IDispatcher, content: VNode) => h('div.modal', [
+  h('div.overlay', {on: {click: d.listen}}),
   h('div.content', [content])
 ])

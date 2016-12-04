@@ -1,16 +1,15 @@
 .artwork-large {
   --size: 250px;
-  height: var(--size);
   width: 100%;
-  overflow: hidden;
-  /* display: flex; */
-  /* justify-content: center; */
+  background-color: #000;
 }
 
 .artwork-large .img-holder {
-  height: 100%;
+  height: var(--size);
   background: no-repeat center center;
-  width: 100%;
+  width: var(--size);
+  margin: auto;
+  background-size: contain;
 }
 
 .artwork-large .placeholder {
@@ -21,6 +20,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  height: var(--size);
 }
 
 .artwork-large .placeholder .material-icons {

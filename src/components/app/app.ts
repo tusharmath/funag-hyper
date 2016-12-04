@@ -25,7 +25,7 @@ export const view = (d: IDispatcher, model: Model) => {
     toolbar.view(d.of('toolbar')),
     model.showSearch ? search.view(d.of('searchBar')) : '',
     h('div.tracks', model.tracks.map(track => trackTile.view(d.of('selectTrack'), track))),
-    model.selectedTrack ? modal.view(modalContent.view(model.selectedTrack)) : ''
+    model.selectedTrack ? modal.view(d.of('closeModal'), modalContent.view(model.selectedTrack)) : ''
   ])
 }
 
@@ -51,6 +51,10 @@ export function update () {
     O.map(
       R.assoc('selectedTrack') as {(track: Track): {(m: Model): Model}},
       select('selectTrack', root$)
+    ),
+    O.map(
+      R.always(R.assoc('selectedTrack', null)),
+      select('closeModal', root$)
     )
   )
   const getTracks = (q: string) => t.request(d.of('HTTP.tracks'), tracksURL(q))
