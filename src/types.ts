@@ -34,3 +34,6 @@ export interface Model {
 export interface Reducer {
   (a: Model): Model
 }
+export interface Task {
+  run(): void
+}

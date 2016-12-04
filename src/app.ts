@@ -3,12 +3,14 @@
  */
 
 import * as O from 'observable-air'
+import * as R from 'ramda'
 import * as t from './tasks'
 import {h} from './lib'
 import * as toolbar from './components/toolbar'
 import * as search from './components/toolbar-search'
 import {dispatcher, select} from './dispatcher'
-import {Model, IDispatcher} from './types'
+import {Model, IDispatcher, Task} from './types'
+import {Request} from './tasks'
 
 const init = (): Model => ({
   showSearch: false,
@@ -21,6 +23,15 @@ export const view = (d: IDispatcher, model: Model) => h('div.app', [
   model.searchQuery
 ])
 
+export const SoundCloudSearch = R.compose(
+  O.multicast,
+  O.map((q: string) => t.request(
+    `//api.soundcloud.com/tracks?client_id=1862b9bf02ed7c80d0f545f835ad8773&q=${q}`
+  )),
+  O.skipRepeats(R.identity),
+  O.map(R.prop('searchQuery'))
+)
+
 export function update () {
   const d = dispatcher('@root')
   const root$ = select('@root')(d.source())
@@ -32,7 +43,15 @@ export function update () {
     O.scan((fn, m) => fn(m), init(), reducer$),
     O.of(init())
   )
-  return O.map(model => t.dom(view(d, model)), model$)
+
+  const request$ = SoundCloudSearch(model$)
+
+  O.forEach(x => console.table(x), O.switchLatest(
+    O.map((r: Request) => r.response$, request$))
+  )
+
+  let dom$ = O.map(model => t.dom(view(d, model)), model$)
+  return O.merge<Task>(dom$, request$)
 }
 
 O.forEach(t => t.run(), update())
