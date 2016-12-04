@@ -4,7 +4,7 @@
 
 import * as O from 'observable-air'
 import {VNode} from 'snabbdom'
-import {Task} from './types'
+import {Task, IDispatcher} from './types'
 const snabbdom = require('snabbdom')
 
 const patch = snabbdom.init([
@@ -27,19 +27,19 @@ export class DomPatch implements Task {
 }
 
 export class Request implements Task {
-  readonly response$: O.IObservable<any>
   private observer: O.IObserver<any>
   private oReq: XMLHttpRequest
 
-  constructor (url: string) {
-    this.response$ = new O.Observable((observer) => {
+  constructor (url: string, dispatcher: IDispatcher) {
+    const response$ = O.multicast(new O.Observable((observer) => {
       this.observer = observer
       return () => this.oReq.abort()
-    })
+    }))
     this.oReq = new XMLHttpRequest()
     this.oReq.addEventListener("load", this.onResponse.bind(this))
     this.oReq.addEventListener("error", this.onError.bind(this))
     this.oReq.open('GET', url)
+    dispatcher.listen(response$)
   }
 
   onResponse () {
@@ -58,4 +58,4 @@ export class Request implements Task {
 }
 
 export const dom = (node: VNode) => new DomPatch(node)
-export const request = (url: string) => new Request(url)
+export const request = (d: IDispatcher, url: string) => new Request(url, d)

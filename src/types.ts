@@ -28,12 +28,26 @@ export interface IDispatcher {
 
 export interface Model {
   showSearch: boolean,
-  searchQuery: string
+  searchQuery: string,
+  tracks: Array<Track>
 }
 
-export interface Reducer {
-  (a: Model): Model
-}
 export interface Task {
   run(): void
+}
+
+export interface TrackUser {
+  id: number
+  username: string
+}
+
+export interface Track {
+  id: number
+  kind: string
+  title: string
+  duration: number
+  stream_url: string
+  artwork_url: string,
+  description: string
+  user: TrackUser
 }

@@ -3,6 +3,8 @@
  */
 
 import * as O from 'observable-air'
+import * as R from 'ramda'
+
 import {IDispatcher} from './types'
 
 class Action<T> {
@@ -15,14 +17,21 @@ class Action<T> {
 }
 
 export class RootDispatcher implements IDispatcher {
-  private subject = O.subject()
+  private __source: O.IObservable<any>
+  private observer: O.IObserver<any>
+
+  constructor () {
+    this.__source = O.multicast(new O.Observable((ob) => {
+      this.observer = ob
+    }))
+  }
 
   listen<T> (val: T): void {
-    this.subject.next(val)
+    this.observer.next(val)
   }
 
   source () {
-    return this.subject
+    return this.__source
   }
 }
 
@@ -45,8 +54,7 @@ export class Dispatcher implements IDispatcher {
 }
 
 export const dispatcher = (scope: string) => new Dispatcher(scope, new RootDispatcher())
-export const select = <T> (scope: string) => {
-  return (source: O.IObservable<Action<T>>) => {
-    return O.map(x => x.value, O.filter(x => x.type === scope, source))
-  }
-}
+export const select = R.curry(<T> (scope: string, source: O.IObservable<Action<T>>) => {
+  return O.map(x => x.value, O.filter(x => x.type === scope, source))
+})
+export const from = R.curry((scope: string, source: IDispatcher) => source.of(scope))
