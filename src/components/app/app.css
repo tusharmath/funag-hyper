@@ -53,8 +53,11 @@ body {
   0% {
     transform: translateY(100%);
   }
-  80% {
+  50% {
     transform: translateY(-15%);
+  }
+  75% {
+    transform: translateY(5%);
   }
   100% {
     transform: translateY(0%);
