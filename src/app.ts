@@ -1,13 +1,13 @@
 /**
  * Created by tushar on 03/12/16.
  */
-
 import * as O from 'observable-air'
 import * as R from 'ramda'
 import * as t from './tasks'
 import {h} from './lib'
 import * as toolbar from './components/app-toolbar'
 import * as search from './components/search-toolbar'
+import * as trackTile from './components/track-tile'
 import {dispatcher, select} from './dispatcher'
 import {Model, IDispatcher, Task, Track} from './types'
 
@@ -21,8 +21,7 @@ export const view = (d: IDispatcher, model: Model) => {
   return h('div.app', [
     toolbar.view(d.of('toolbar')),
     model.showSearch ? search.view(d.of('searchBar')) : '',
-    model.searchQuery,
-    model.tracks.length
+    h('ul.tracks', model.tracks.map(trackTile.view))
   ])
 }
 

@@ -24,7 +24,7 @@ export const update = (source: O.IObservable<any>) => {
 }
 
 export const view = (d: IDispatcher) => {
-  return h('div.app-toolbar', [
+  return h('div.toolbar.app-toolbar', [
     iconButton.view('menu', d.of('menu')),
     h('div.flb-grow-1', ['Funag']),
     iconButton.view('search', d.of('search'))

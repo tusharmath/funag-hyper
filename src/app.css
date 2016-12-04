@@ -2,6 +2,7 @@
 @import "components/flexbox.css";
 @import "components/icon-button.css";
 @import "components/search-toolbar.css";
+@import "components/toolbar.css";
 
 :root {
   --main-bg-color: #E6E6E6;
@@ -21,4 +22,8 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+.app {
+  margin-top: var(--button-height);
 }

@@ -10,7 +10,7 @@ import {IDispatcher, Model} from '../types'
 import {select} from '../dispatcher'
 
 export const view = (d: IDispatcher) => {
-  return h('div.search-toolbar', [
+  return h('div.toolbar.search-toolbar', [
     icon.view('arrow_back', d.of('back')),
     h('input', {
       props: {placeholder: 'Search', autofocus: true},
