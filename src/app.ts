@@ -21,7 +21,7 @@ export const view = (d: IDispatcher, model: Model) => {
   return h('div.app', [
     toolbar.view(d.of('toolbar')),
     model.showSearch ? search.view(d.of('searchBar')) : '',
-    h('ul.tracks', model.tracks.map(trackTile.view))
+    h('div.tracks', model.tracks.map(trackTile.view))
   ])
 }
 

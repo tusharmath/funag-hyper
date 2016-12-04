@@ -3,6 +3,7 @@
 @import "components/icon-button.css";
 @import "components/search-toolbar.css";
 @import "components/toolbar.css";
+@import "components/track-tile.css";
 
 :root {
   --main-bg-color: #E6E6E6;
@@ -17,7 +18,10 @@ html, body {
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  color: rgb(34, 34, 34);
+  font-weight: 400;
 }
 
 * {
