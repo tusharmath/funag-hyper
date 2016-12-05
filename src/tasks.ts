@@ -1,7 +1,6 @@
 /**
  * Created by tushar on 03/12/16.
  */
-
 import * as O from 'observable-air'
 import {VNode} from 'snabbdom'
 import {Task, IDispatcher} from './types'
@@ -57,5 +56,15 @@ export class Request implements Task {
   }
 }
 
+export class PreventDefault implements Task {
+  constructor (private event: Event) {
+  }
+
+  run (): void {
+    this.event.preventDefault()
+  }
+}
+
 export const dom = (node: VNode) => new DomPatch(node)
 export const request = (d: IDispatcher, url: string) => new Request(url, d)
+export const preventDefault = (ev: Event) => new PreventDefault(ev)
