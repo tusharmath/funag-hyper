@@ -1,7 +1,6 @@
 /**
  * Created by tushar on 03/12/16.
  */
-
 import {Hyperscript} from './types'
 import * as O from 'observable-air'
 import * as R from 'ramda'

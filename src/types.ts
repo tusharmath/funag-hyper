@@ -3,6 +3,7 @@
  */
 import {VNode} from 'snabbdom'
 import * as O from 'observable-air'
+import {ModalModel} from './components/modal/modal'
 
 export interface VNodeProps {
   attrs?: {[name: string]: string},
@@ -30,7 +31,8 @@ export interface Model {
   showSearch: boolean,
   searchQuery: string,
   tracks: Array<Track>,
-  selectedTrack: Track
+  selectedTrack?: Track,
+  modal: ModalModel
 }
 
 export interface Task {

@@ -1,7 +1,6 @@
 /**
  * Created by tushar on 03/12/16.
  */
-
 import {h} from '../../lib'
 import {IDispatcher} from '../../types'
 

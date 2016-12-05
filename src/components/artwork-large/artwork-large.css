@@ -1,15 +1,15 @@
 .artwork-large {
   --size: 250px;
   width: 100%;
-  background-color: #000;
+  background-color: var(--placeholder-bg-color);
 }
 
 .artwork-large .img-holder {
   height: var(--size);
   background: no-repeat center center;
-  width: var(--size);
+  width: 100%;
   margin: auto;
-  background-size: contain;
+  background-size: cover;
 }
 
 .artwork-large .placeholder {

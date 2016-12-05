@@ -28,9 +28,9 @@
 }
 
 .modal.animate-out .overlay {
-  animation: fade-out 300ms linear;
+  animation: fade-out 400ms cubic-bezier(0.6, -0.28, 0.74, 0.05);
 }
 
 .modal.animate-out .content {
-  animation: swipe-out 300ms cubic-bezier(1, 0, 1, 1);
+  animation: swipe-out 400ms cubic-bezier(0.6, -0.28, 0.74, 0.05);
 }
