@@ -7,7 +7,7 @@ import * as R from 'ramda'
 
 import {IDispatcher} from './types'
 
-class Action<T> {
+export class Action<T> {
   constructor (public readonly type: string, public readonly value: T) {
   }
 
