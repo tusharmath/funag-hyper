@@ -21,9 +21,9 @@ export interface Hyperscript {
   (type: string): VNode
 }
 
-export interface IDispatcher {
+export interface ISource {
   listen<T>(val: T): void
-  of?(scope: string): IDispatcher
+  of?(scope: string): ISource
   source<T>(): O.IObservable<T>
 }
 

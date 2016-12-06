@@ -5,7 +5,7 @@ import * as O from 'observable-air'
 import * as R from 'ramda'
 import {h} from '../../lib'
 import * as iconButton from '../icon-button/icon-button'
-import {IDispatcher} from '../../types'
+import {ISource} from '../../types'
 import {select} from '../../dispatcher'
 
 
@@ -22,7 +22,7 @@ export const update = (source: O.IObservable<any>) => {
   )
 }
 
-export const view = (d: IDispatcher) => {
+export const view = (d: ISource) => {
   return h('div.toolbar.app-toolbar', [
     iconButton.view('menu', d.of('menu')),
     h('div.flb-grow-1', ['Funag']),

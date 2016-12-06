@@ -3,7 +3,8 @@
  */
 import * as O from 'observable-air'
 import {VNode} from 'snabbdom'
-import {Task, IDispatcher} from './types'
+import {Task, ISource, Track} from './types'
+import {TOKEN} from './lib'
 const snabbdom = require('snabbdom')
 
 const patch = snabbdom.init([
@@ -12,6 +13,8 @@ const patch = snabbdom.init([
   require('snabbdom/modules/style'),
   require('snabbdom/modules/eventlisteners'),
 ])
+const audio = document.createElement('audio') as HTMLAudioElement
+
 export class DomPatch implements Task {
   static node = document.getElementById('app')
   private __node: VNode
@@ -29,7 +32,7 @@ export class Request implements Task {
   private observer: O.IObserver<any>
   private oReq: XMLHttpRequest
 
-  constructor (url: string, dispatcher: IDispatcher) {
+  constructor (url: string, dispatcher: ISource) {
     const response$ = O.multicast(new O.Observable((observer) => {
       this.observer = observer
       return () => this.oReq.abort()
@@ -65,6 +68,17 @@ export class PreventDefault implements Task {
   }
 }
 
+export class PlayTrack implements Task {
+  constructor (private track: Track) {
+  }
+
+  run (): void {
+    audio.pause()
+    audio.src = this.track.stream_url + `?client_id=${TOKEN}`
+    audio.play()
+  }
+}
 export const dom = (node: VNode) => new DomPatch(node)
-export const request = (d: IDispatcher, url: string) => new Request(url, d)
+export const request = (d: ISource, url: string) => new Request(url, d)
 export const preventDefault = (ev: Event) => new PreventDefault(ev)
+export const play = (track: Track) => new PlayTrack(track)

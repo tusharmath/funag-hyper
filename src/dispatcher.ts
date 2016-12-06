@@ -3,7 +3,7 @@
  */
 import * as O from 'observable-air'
 import * as R from 'ramda'
-import {IDispatcher} from './types'
+import {ISource} from './types'
 
 export class Action<T> {
   constructor (public readonly type: string, public readonly value: T) {
@@ -14,7 +14,7 @@ export class Action<T> {
   }
 }
 
-export class RootDispatcher implements IDispatcher {
+export class RootDispatcher implements ISource {
   private __source: O.IObservable<any>
   private observer: O.IObserver<any>
 
@@ -33,12 +33,12 @@ export class RootDispatcher implements IDispatcher {
   }
 }
 
-export class Dispatcher implements IDispatcher {
-  constructor (private scope: string, private parent: IDispatcher) {
+export class Dispatcher implements ISource {
+  constructor (private scope: string, private parent: ISource) {
     this.listen = this.listen.bind(this)
   }
 
-  of (scope: string): IDispatcher {
+  of (scope: string): ISource {
     return new Dispatcher(scope, this)
   }
 
@@ -55,4 +55,4 @@ export const dispatcher = (scope: string) => new Dispatcher(scope, new RootDispa
 export const select = R.curry(<T> (scope: string, source: O.IObservable<Action<T>>) => {
   return O.map(x => x.value, O.filter(x => x.type === scope, source))
 })
-export const from = R.curry((scope: string, source: IDispatcher) => source.of(scope))
+export const from = R.curry((scope: string, source: ISource) => source.of(scope))

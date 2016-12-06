@@ -12,7 +12,7 @@ import * as modal from '../modal/modal'
 import {ModalModel} from '../modal/modal'
 import * as modalContent from '../track-modal-content/track-modal-content'
 import {dispatcher, select, from} from '../../dispatcher'
-import {Model, IDispatcher, Task, Track} from '../../types'
+import {Model, ISource, Task, Track} from '../../types'
 
 const init = (): Model => ({
   showSearch: false,
@@ -21,7 +21,7 @@ const init = (): Model => ({
   selectedTrack: null,
   modal: modal.init()
 })
-export const view = (d: IDispatcher, model: Model) => {
+export const view = (d: ISource, model: Model) => {
   const content = !model.selectedTrack ? '' : modalContent.view(model.selectedTrack)
   return h('div.app', [
     toolbar.view(d.of('toolbar')),
@@ -62,7 +62,7 @@ export const model = (reducer$: O.IObservable<{(m: Model): Model}>) => {
   )
 }
 const requestTracks = R.useWith(t.request, [from('HTTP.tracks'), tracksURL])
-export const tasks = (D: IDispatcher, model$: O.IObservable<Model>) => {
+export const tasks = (D: ISource, model$: O.IObservable<Model>) => {
   const request$ = O.map(requestTracks(D), searchQuery(model$))
   const dom$ = O.map(model => t.dom(view(D, model)), model$)
   return O.merge<Task>(dom$, request$)

@@ -1,11 +1,11 @@
 /**
  * Created by tushar on 04/12/16.
  */
-import {Track, IDispatcher} from '../../types'
+import {Track, ISource} from '../../types'
 import {h, durationFormat} from '../../lib'
 import * as artwork from '../artwork/artwork'
 
-export const view = (d: IDispatcher, track: Track) => {
+export const view = (d: ISource, track: Track) => {
   return h('div.track-tile', {on: {click: [d.listen, track]}}, [
     artwork.view(track.artwork_url),
     h('div', [
