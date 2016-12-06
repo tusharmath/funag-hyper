@@ -9,6 +9,7 @@
 @import "../floating-button/floating-button.css";
 @import "../track-modal-content/track-modal-content.css";
 @import "../artwork-large/artwork-large.css";
+@import "../audio/audio.css";
 
 :root {
   --main-bg-color: #E6E6E6;
@@ -44,8 +45,4 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-audio {
-  display: none;
 }
