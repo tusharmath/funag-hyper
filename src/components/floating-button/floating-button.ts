@@ -3,8 +3,11 @@
  */
 import {h} from '../../lib'
 
-export const view = (name: string) => {
-  return h('button.floating-button', [
-    h('i.material-icons', [name])
+export const view = (name: string, isLoading = false) => {
+  return h('div', [
+    h('button.floating-button', [
+      h('i.material-icons', [name]),
+    ]),
+    !isLoading ? '' : h('div.floating-button-loader')
   ])
 }
