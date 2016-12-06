@@ -56,3 +56,4 @@ export const select = R.curry(<T> (scope: string, source: O.IObservable<Action<T
   return O.map(x => x.value, O.filter(x => x.type === scope, source))
 })
 export const from = R.curry((scope: string, source: ISource) => source.of(scope))
+export const source = (d: ISource) => d.source()
