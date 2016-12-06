@@ -25,12 +25,49 @@
   position: absolute;
   right: 8px;
   transform: translateY(-50%);
+  outline: none;
 }
 
 .modal.animate-out .overlay {
-  animation: fade-out 400ms cubic-bezier(0.6, -0.28, 0.74, 0.05);
+  animation: overlay-fade-out 400ms cubic-bezier(0.6, -0.28, 0.74, 0.05);
 }
 
 .modal.animate-out .content {
-  animation: swipe-out 400ms cubic-bezier(0.6, -0.28, 0.74, 0.05);
+  animation: modal-swipe-out 400ms cubic-bezier(0.6, -0.28, 0.74, 0.05);
+}
+
+@keyframes overlay-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes modal-swipe-out {
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes bouncy-modal {
+  0% {
+    transform: translateY(100%);
+  }
+  50% {
+    transform: translateY(-15%);
+  }
+  75% {
+    transform: translateY(5%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
