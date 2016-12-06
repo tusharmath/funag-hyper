@@ -3,7 +3,6 @@
  */
 import {VNode} from 'snabbdom'
 import * as O from 'observable-air'
-import {ModalModel} from './components/modal/modal'
 
 export interface VNodeProps {
   attrs?: {[name: string]: string},
@@ -32,7 +31,8 @@ export interface Model {
   searchQuery: string,
   tracks: Array<Track>,
   selectedTrack?: Track,
-  modal: ModalModel
+  modal: ModalModel,
+  audio: AudioModel
 }
 
 export interface Task {
@@ -53,4 +53,22 @@ export interface Track {
   artwork_url: string,
   description: string
   user: TrackUser
+}
+
+export interface Reducer<T> {
+  (m: T): T
+}
+
+export interface ModalModel {
+  hide: boolean
+  hidden: boolean
+}
+
+export enum MediaStatus {
+  PLAYING, PAUSED, ERRORED, LOADING
+}
+
+export interface AudioModel {
+  status: MediaStatus,
+  track?: Track
 }

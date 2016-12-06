@@ -5,13 +5,8 @@ import * as R from 'ramda'
 import * as O from 'observable-air'
 import {h} from '../../lib'
 import {VNode} from 'snabbdom'
-import {ISource} from '../../types'
+import {ISource, ModalModel} from '../../types'
 import {select} from '../../dispatcher'
-
-export interface ModalModel {
-  hide: boolean
-  hidden: boolean
-}
 
 export const view = (d: ISource, content: VNode | string, model: ModalModel) => {
   return model.hidden ? '' : h('div.modal', {

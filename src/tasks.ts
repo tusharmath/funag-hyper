@@ -13,7 +13,7 @@ const patch = snabbdom.init([
   require('snabbdom/modules/style'),
   require('snabbdom/modules/eventlisteners'),
 ])
-const audio = document.createElement('audio') as HTMLAudioElement
+const audio = () => document.querySelector('audio') as HTMLAudioElement
 
 export class DomPatch implements Task {
   static node = document.getElementById('app')
@@ -69,15 +69,23 @@ export class PreventDefault implements Task {
 }
 
 export class PlayTrack implements Task {
+  private audio = audio()
+
   constructor (private track: Track) {
   }
 
   run (): void {
-    audio.pause()
-    audio.src = this.track.stream_url + `?client_id=${TOKEN}`
-    audio.play()
+    const src = this.track.stream_url + `?client_id=${TOKEN}`
+    if (this.audio.src === src) return
+    else {
+      this.audio.src = ''
+      this.audio.load()
+      this.audio.src = src
+      this.audio.play()
+    }
   }
 }
+
 export const dom = (node: VNode) => new DomPatch(node)
 export const request = (d: ISource, url: string) => new Request(url, d)
 export const preventDefault = (ev: Event) => new PreventDefault(ev)
