@@ -4,7 +4,7 @@
 import * as O from 'observable-air'
 import * as R from 'ramda'
 import * as t from '../../tasks'
-import {h} from '../../lib'
+import {h, TOKEN} from '../../lib'
 import * as toolbar from '../app-toolbar/app-toolbar'
 import * as search from '../search-toolbar/search-toolbar'
 import * as trackTile from '../track-tile/track-tile'
@@ -35,7 +35,7 @@ export const searchQuery = R.compose(
   O.map(R.prop('searchQuery'))
 )
 export const tracksURL = (q: string) => {
-  return `//api.soundcloud.com/tracks?client_id=1862b9bf02ed7c80d0f545f835ad8773&q=${q}`
+  return `//api.soundcloud.com/tracks?client_id=${TOKEN}&q=${q}`
 }
 export const reducers = (root$: O.IObservable<any>) => {
   return O.merge(

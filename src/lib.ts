@@ -15,3 +15,4 @@ export const durationFormat = (time: number) => {
   const secs = Math.round((time - mins * 60000) / 1000)
   return `${mins}:${secs.toString().length < 2 ? secs + '0' : secs}`
 }
+export const TOKEN = '1862b9bf02ed7c80d0f545f835ad8773'
