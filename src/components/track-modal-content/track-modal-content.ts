@@ -31,5 +31,5 @@ export const view = (d: ISource, track: Track) => {
 }
 
 export const tasks = (source: O.IObservable<any>) => {
-  return O.map(t.play, select('click', source))
+  return O.map(t.play, select(source, 'click'))
 }

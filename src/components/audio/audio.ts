@@ -14,12 +14,13 @@ export const init = (): AudioModel => {
 }
 export const view = (d: ISource, model: AudioModel) => {
   return h('audio', {
-    attrs: {src: model.track.stream_url},
+    attrs: model.track ? {src: model.track.stream_url} : {},
+
     on: {
       timeupdate: d.of('timeUpdate').listen,
       play: d.of('play').listen,
       pause: d.of('pause').listen,
-      error: d.of('error').listen 
+      error: d.of('error').listen
     }
   })
 }

@@ -15,6 +15,10 @@ export class Action<T> {
 }
 
 export class RootDispatcher implements ISource {
+  of (scope: string): ISource {
+    return this
+  }
+
   private __source: O.IObservable<any>
   private observer: O.IObserver<any>
 
@@ -52,7 +56,7 @@ export class Dispatcher implements ISource {
 }
 
 export const dispatcher = (scope: string) => new Dispatcher(scope, new RootDispatcher())
-export const select = R.curry(<T> (scope: string, source: O.IObservable<Action<T>>) => {
+export const select = R.curry((source: O.IObservable<Action<any>>, scope: string) => {
   return O.map(x => x.value, O.filter(x => x.type === scope, source))
 })
 export const from = R.curry((scope: string, source: ISource) => source.of(scope))

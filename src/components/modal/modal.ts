@@ -26,15 +26,15 @@ export const init = (isVisible = false): ModalModel => ({
 export const animationEnd = R.compose(
   O.filter((x: number) => x % 2 === 0),
   O.scan(R.add as {(a: number, b: number): number}, 0),
-  O.map(R.always(1)),
-  select('animationEnd')
+  O.map(R.always(1))
 )
 
 const mergeR = R.flip(R.merge)
 
 export const update = (source$: O.IObservable<any>, show$: O.IObservable<any>) => {
-  const overlayClick$ = select('click', source$)
-  const animationEnd$ = animationEnd(source$)
+  const actions = select(source$)
+  const overlayClick$ = actions('click')
+  const animationEnd$ = animationEnd(actions('animationEnd'))
 
   return O.merge(
     O.map(R.always(mergeR({hide: true, hidden: false})), overlayClick$),

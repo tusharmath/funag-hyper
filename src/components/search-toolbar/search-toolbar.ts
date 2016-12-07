@@ -21,15 +21,15 @@ export const view = (d: ISource) => {
 
 
 export const update = (source: O.IObservable<any>) => {
-
+  const actions = select(source)
   const value$ = O.map(
     R.assoc('searchQuery') as {(a: string): {(m: Model): Model}},
-    targetValue(select('value')(source))
+    targetValue(actions('value'))
   )
 
   const back$ = O.map(
     R.always(R.assoc('showSearch', false)),
-    select('back')(source)
+    actions('back')
   )
   return O.merge(value$, back$)
 }

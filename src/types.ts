@@ -22,7 +22,7 @@ export interface Hyperscript {
 
 export interface ISource {
   listen<T>(val: T): void
-  of?(scope: string): ISource
+  of(scope: string): ISource
   source<T>(): O.IObservable<T>
 }
 
@@ -71,4 +71,8 @@ export enum MediaStatus {
 export interface AudioModel {
   status: MediaStatus,
   track?: Track
+}
+
+export interface ReducerLense<A, B> {
+  (r: Reducer<A>): Reducer<B>
 }

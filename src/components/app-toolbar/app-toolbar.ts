@@ -18,7 +18,7 @@ const showSearch = R.ifElse(
 export const update = (source: O.IObservable<any>) => {
   return O.map(
     R.always(showSearch),
-    select('search')(source)
+    select(source, 'search')
   )
 }
 

@@ -10,15 +10,15 @@ import * as search from '../search-toolbar/search-toolbar'
 import * as t from '../../tasks'
 import * as toolbar from '../app-toolbar/app-toolbar'
 import * as trackList from '../track-list/track-list'
-import {dispatcher, select, from, source} from '../../dispatcher'
+import {dispatcher, select, from} from '../../dispatcher'
 import {h, TOKEN} from '../../lib'
-import {Model, ISource, Task, Track, Reducer, ModalModel, AudioModel} from '../../types'
+import {Model, ISource, Task, Track, Reducer, ModalModel, AudioModel, ReducerLense} from '../../types'
 
 const init = (): Model => ({
   showSearch: false,
   searchQuery: '',
   tracks: [],
-  selectedTrack: null,
+  selectedTrack: undefined,
   modal: modal.init(),
   audio: audio.init()
 })
@@ -36,32 +36,29 @@ export const searchQuery = R.compose(
   O.skipRepeats(R.identity),
   O.map(R.prop('searchQuery'))
 )
-export const root = R.compose(
-  select('@root'),
-  source
-)
 export const tracksURL = (q: string) => {
   return `//api.soundcloud.com/tracks?client_id=${TOKEN}&q=${q}`
 }
 export const update = (root$: O.IObservable<any>) => {
+  const actions = select(root$)
   return O.merge(
-    toolbar.update(select('toolbar', root$)),
-    search.update(select('searchBar', root$)),
+    toolbar.update(actions('toolbar')),
+    search.update(actions('searchBar')),
     O.map(
-      R.over(R.lensProp('modal')) as {(r: Reducer<ModalModel>): Reducer<Model>},
-      modal.update(select('modal', root$), select('selectTrack', root$))
+      R.over(R.lensProp('modal')) as ReducerLense<ModalModel, Model>,
+      modal.update(actions('modal'), actions('selectTrack'))
     ),
     O.map(
-      R.over(R.lensProp('audio')) as {(r: Reducer<AudioModel>): Reducer<Model>},
-      audio.update(select('audio', root$))
+      R.over(R.lensProp('audio')) as ReducerLense<AudioModel, Model>,
+      audio.update(actions('audio'))
     ),
     O.map(
       R.assoc('tracks') as {(tracks: Track[]): Reducer<Model>},
-      O.switchLatest(select('HTTP.tracks', root$))
+      O.switchLatest(actions('HTTP.tracks'))
     ),
     O.map(
       R.assoc('selectedTrack') as {(track: Track): Reducer<Model>},
-      select('selectTrack', root$)
+      actions('selectTrack')
     )
   )
 }
@@ -73,14 +70,15 @@ export const model = (reducer$: O.IObservable<Reducer<Model>>) => {
 }
 const requestTracks = R.useWith(t.request, [from('HTTP.tracks'), tracksURL])
 export const tasks = (D: ISource, model$: O.IObservable<Model>) => {
+  const actions = select(select(D.source(), '@root'))
   const request$ = O.map(requestTracks(D), searchQuery(model$))
   const dom$ = O.map(model => t.dom(view(D, model)), model$)
-  const play$ = modalContent.tasks(select('modalContent', root(D)))
+  const play$ = modalContent.tasks(actions('modalContent'))
   return O.merge<Task>(dom$, request$, play$)
 }
 export function main (): O.IObservable<Task> {
   const D = dispatcher('@root')
-  return tasks(D, model(update(select('@root', D.source()))))
+  return tasks(D, model(update(select(D.source(), '@root'))))
 }
 O.forEach(t => t.run(), main())
 const body = document.body
