@@ -57,6 +57,10 @@ systemjs@^0.19.41:
   dependencies:
     when "^3.7.5"
 
+typescript@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.1.4.tgz#b53b69fb841126acb1dd4b397d21daba87572251"
+
 when@^3.7.5:
   version "3.7.7"
   resolved "https://registry.yarnpkg.com/when/-/when-3.7.7.tgz#aba03fc3bb736d6c88b091d013d8a8e590d84718"
