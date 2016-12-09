@@ -30,6 +30,6 @@ export const view = (d: ISource, track: Track) => {
   ])
 }
 
-export const tasks = (source: O.IObservable<any>) => {
+export const tasks = (source: O.Observable<any>) => {
   return O.map(t.play, select(source, 'click'))
 }

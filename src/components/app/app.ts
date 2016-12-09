@@ -39,7 +39,7 @@ export const searchQuery = R.compose(
 export const tracksURL = (q: string) => {
   return `//api.soundcloud.com/tracks?client_id=${TOKEN}&q=${q}`
 }
-export const update = (root$: O.IObservable<any>) => {
+export const update = (root$: O.Observable<any>) => {
   const actions = select(root$)
   return O.merge(
     toolbar.update(actions('toolbar')),
@@ -62,21 +62,21 @@ export const update = (root$: O.IObservable<any>) => {
     )
   )
 }
-export const model = (reducer$: O.IObservable<Reducer<Model>>) => {
+export const model = (reducer$: O.Observable<Reducer<Model>>) => {
   return O.merge(
     O.scan((fn, m) => fn(m), init(), reducer$),
     O.of(init())
   )
 }
 const requestTracks = R.useWith(t.request, [from('HTTP.tracks'), tracksURL])
-export const tasks = (D: ISource, model$: O.IObservable<Model>) => {
+export const tasks = (D: ISource, model$: O.Observable<Model>) => {
   const actions = select(select(D.source(), '@root'))
   const request$ = O.map(requestTracks(D), searchQuery(model$))
   const dom$ = O.map(model => t.dom(view(D, model)), model$)
   const play$ = modalContent.tasks(actions('modalContent'))
   return O.merge<Task>(dom$, request$, play$)
 }
-export function main (): O.IObservable<Task> {
+export function main (): O.Observable<Task> {
   const D = dispatcher('@root')
   return tasks(D, model(update(select(D.source(), '@root'))))
 }

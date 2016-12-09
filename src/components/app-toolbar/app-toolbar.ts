@@ -15,7 +15,7 @@ const showSearch = R.ifElse(
   R.assoc('showSearch', true)
 )
 
-export const update = (source: O.IObservable<any>) => {
+export const update = (source: O.Observable<any>) => {
   return O.map(
     R.always(showSearch),
     select(source, 'search')

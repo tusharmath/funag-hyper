@@ -5,6 +5,10 @@
     "noImplicitAny": true,
     "sourceMap": true,
     "noUnusedLocals": true,
-    "strictNullChecks": true
-  }
+    "strictNullChecks": true,
+    "maxNodeModuleJsDepth": 0
+  },
+  "files": [
+    "typings/index.d.ts"
+  ]
 }

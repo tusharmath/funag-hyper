@@ -25,7 +25,7 @@ export const view = (d: ISource, model: AudioModel) => {
   })
 }
 
-export const update = (d: O.IObservable<Action<Event>>) => {
+export const update = (d: O.Observable<Action<Event>>) => {
   O.forEach(x => console.log(x), d)
-  return new O.Observable(() => void 0)
+  return O.create(() => void 0)
 }

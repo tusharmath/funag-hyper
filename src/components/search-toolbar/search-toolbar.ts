@@ -20,7 +20,7 @@ export const view = (d: ISource) => {
 }
 
 
-export const update = (source: O.IObservable<any>) => {
+export const update = (source: O.Observable<any>) => {
   const actions = select(source)
   const value$ = O.map(
     R.assoc('searchQuery') as {(a: string): {(m: Model): Model}},

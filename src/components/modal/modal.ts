@@ -31,7 +31,7 @@ export const animationEnd = R.compose(
 
 const mergeR = R.flip(R.merge)
 
-export const update = (source$: O.IObservable<any>, show$: O.IObservable<any>) => {
+export const update = (source$: O.Observable<any>, show$: O.Observable<any>) => {
   const actions = select(source$)
   const overlayClick$ = actions('click')
   const animationEnd$ = animationEnd(actions('animationEnd'))

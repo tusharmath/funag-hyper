@@ -23,7 +23,7 @@ export interface Hyperscript {
 export interface ISource {
   listen<T>(val: T): void
   of(scope: string): ISource
-  source<T>(): O.IObservable<T>
+  source<T>(): O.Observable<T>
 }
 
 export interface Model {

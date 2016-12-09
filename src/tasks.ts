@@ -29,11 +29,11 @@ export class DomPatch implements Task {
 }
 
 export class Request implements Task {
-  private observer: O.IObserver<any>
+  private observer: O.Observer<any>
   private oReq: XMLHttpRequest
 
   constructor (url: string, dispatcher: ISource) {
-    const response$ = O.multicast(new O.Observable((observer) => {
+    const response$ = O.multicast(O.create((observer) => {
       this.observer = observer
       return () => this.oReq.abort()
     }))

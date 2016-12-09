@@ -50,9 +50,9 @@ export const touchEndR = R.curry((dir: Direction, touchEnd: TouchEvent, state: D
 })
 
 export const update = (dir: Direction, source: {
-  touchStart$: O.IObservable<TouchEvent>,
-  touchMove$: O.IObservable<TouchEvent>,
-  touchEnd$: O.IObservable<TouchEvent>,
+  touchStart$: O.Observable<TouchEvent>,
+  touchMove$: O.Observable<TouchEvent>,
+  touchEnd$: O.Observable<TouchEvent>,
 }) => {
   type TReducer = (t: DragModel) => DragModel
   return O.merge(
