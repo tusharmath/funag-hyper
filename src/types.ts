@@ -20,9 +20,9 @@ export interface Hyperscript {
   (type: string): VNode
 }
 
-export interface ISource {
+export interface EventEmitter {
   listen<T>(val: T): void
-  of(scope: string): ISource
+  of(scope: string): EventEmitter
   source<T>(): O.Observable<T>
 }
 

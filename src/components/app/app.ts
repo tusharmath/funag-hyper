@@ -12,7 +12,7 @@ import * as toolbar from '../app-toolbar/app-toolbar'
 import * as trackList from '../track-list/track-list'
 import {dispatcher, select, from} from '../../dispatcher'
 import {h, TOKEN} from '../../lib'
-import {Model, ISource, Task, Track, Reducer, ModalModel, AudioModel, ReducerLense} from '../../types'
+import {Model, EventEmitter, Task, Track, Reducer, ModalModel, AudioModel, ReducerLense} from '../../types'
 
 const init = (): Model => ({
   showSearch: false,
@@ -22,7 +22,7 @@ const init = (): Model => ({
   modal: modal.init(),
   audio: audio.init()
 })
-export const view = (d: ISource, model: Model) => {
+export const view = (d: EventEmitter, model: Model) => {
   const content = !model.selectedTrack ? '' : modalContent.view(d.of('modalContent'), model.selectedTrack)
   return h('div.app', [
     toolbar.view(d.of('toolbar')),
@@ -69,7 +69,7 @@ export const model = (reducer$: O.Observable<Reducer<Model>>) => {
   )
 }
 const requestTracks = R.useWith(t.request, [from('HTTP.tracks'), tracksURL])
-export const tasks = (D: ISource, model$: O.Observable<Model>) => {
+export const tasks = (D: EventEmitter, model$: O.Observable<Model>) => {
   const actions = select(select(D.source(), '@root'))
   const request$ = O.map(requestTracks(D), searchQuery(model$))
   const dom$ = O.map(model => t.dom(view(D, model)), model$)

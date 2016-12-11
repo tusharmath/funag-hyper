@@ -3,7 +3,7 @@
  */
 import * as O from 'observable-air'
 import {h} from '../../lib'
-import {ISource, AudioModel, MediaStatus} from '../../types'
+import {EventEmitter, AudioModel, MediaStatus} from '../../types'
 import {Action} from '../../dispatcher'
 
 
@@ -12,7 +12,7 @@ export const init = (): AudioModel => {
     status: MediaStatus.PAUSED
   }
 }
-export const view = (d: ISource, model: AudioModel) => {
+export const view = (d: EventEmitter, model: AudioModel) => {
   return h('audio', {
     attrs: model.track ? {src: model.track.stream_url} : {},
 

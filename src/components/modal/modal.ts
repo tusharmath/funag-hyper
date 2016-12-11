@@ -5,10 +5,10 @@ import * as R from 'ramda'
 import * as O from 'observable-air'
 import {h} from '../../lib'
 import {VNode} from 'snabbdom'
-import {ISource, ModalModel} from '../../types'
+import {EventEmitter, ModalModel} from '../../types'
 import {select} from '../../dispatcher'
 
-export const view = (d: ISource, content: VNode | string, model: ModalModel) => {
+export const view = (d: EventEmitter, content: VNode | string, model: ModalModel) => {
   return model.hidden ? '' : h('div.modal', {
     'class': {'animate-out': model.hide},
     on: {animationend: d.of('animationEnd').listen}

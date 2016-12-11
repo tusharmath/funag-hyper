@@ -3,7 +3,7 @@
  */
 import * as O from 'observable-air'
 import {VNode} from 'snabbdom'
-import {Task, ISource, Track} from './types'
+import {Task, EventEmitter, Track} from './types'
 import {TOKEN} from './lib'
 const snabbdom = require('snabbdom')
 
@@ -32,7 +32,7 @@ export class Request implements Task {
   private observer: O.Observer<any>
   private oReq: XMLHttpRequest
 
-  constructor (url: string, dispatcher: ISource) {
+  constructor (url: string, dispatcher: EventEmitter) {
     const response$ = O.multicast(O.create((observer) => {
       this.observer = observer
       return () => this.oReq.abort()
@@ -87,6 +87,6 @@ export class PlayTrack implements Task {
 }
 
 export const dom = (node: VNode) => new DomPatch(node)
-export const request = (d: ISource, url: string) => new Request(url, d)
+export const request = (d: EventEmitter, url: string) => new Request(url, d)
 export const preventDefault = (ev: Event) => new PreventDefault(ev)
 export const play = (track: Track) => new PlayTrack(track)

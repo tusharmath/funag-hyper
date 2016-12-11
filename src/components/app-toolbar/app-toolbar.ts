@@ -5,7 +5,7 @@ import * as O from 'observable-air'
 import * as R from 'ramda'
 import {h} from '../../lib'
 import * as iconButton from '../icon-button/icon-button'
-import {ISource} from '../../types'
+import {EventEmitter} from '../../types'
 import {select} from '../../dispatcher'
 
 
@@ -22,7 +22,7 @@ export const update = (source: O.Observable<any>) => {
   )
 }
 
-export const view = (d: ISource) => {
+export const view = (d: EventEmitter) => {
   return h('div.toolbar.app-toolbar', [
     iconButton.view('menu', d.of('menu')),
     h('div.flb-grow-1', ['Funag']),

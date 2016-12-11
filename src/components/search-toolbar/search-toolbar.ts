@@ -5,10 +5,10 @@ import {h, targetValue} from '../../lib'
 import * as R from 'ramda'
 import * as O from 'observable-air'
 import * as icon from '../icon-button/icon-button'
-import {ISource, Model} from '../../types'
+import {EventEmitter, Model} from '../../types'
 import {select} from '../../dispatcher'
 
-export const view = (d: ISource) => {
+export const view = (d: EventEmitter) => {
   return h('div.toolbar.search-toolbar', [
     icon.view('arrow_back', d.of('back')),
     h('input', {
