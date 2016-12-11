@@ -31,8 +31,7 @@ export interface Model {
   searchQuery: string,
   tracks: Array<Track>,
   selectedTrack?: Track,
-  modal: ModalModel,
-  audio: AudioModel
+  modal: ModalModel
 }
 
 export interface Task {

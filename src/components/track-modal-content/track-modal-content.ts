@@ -30,6 +30,7 @@ export const view = (d: EventEmitter, track: Track) => {
   ])
 }
 
-export const tasks = (source: O.Observable<any>) => {
-  return O.map(t.play, select(source, 'click'))
+export const tasks = (source: O.Observable<any>, audio$: O.Observable<HTMLAudioElement>) => {
+  const click$ = select(source, 'click')
+  return O.sample(t.play, click$, [click$, audio$])
 }

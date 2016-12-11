@@ -2,6 +2,7 @@
  * Created by tushar on 03/12/16.
  */
 import * as O from 'observable-air'
+import * as R from 'ramda'
 import {VNode} from 'snabbdom'
 import {Task, EventEmitter, Track} from './types'
 import {TOKEN} from './lib'
@@ -13,7 +14,6 @@ const patch = snabbdom.init([
   require('snabbdom/modules/style'),
   require('snabbdom/modules/eventlisteners'),
 ])
-const audio = () => document.querySelector('audio') as HTMLAudioElement
 
 export class DomPatch implements Task {
   static node = document.getElementById('app')
@@ -69,9 +69,7 @@ export class PreventDefault implements Task {
 }
 
 export class PlayTrack implements Task {
-  private audio = audio()
-
-  constructor (private track: Track) {
+  constructor (private audio: HTMLAudioElement, private track: Track) {
   }
 
   run (): void {
@@ -86,7 +84,24 @@ export class PlayTrack implements Task {
   }
 }
 
+export class Audio implements Task {
+  private audio: HTMLAudioElement
+
+  constructor (private d: EventEmitter) {
+  }
+
+  run (): void {
+    const audio = document.createElement('audio')
+    this.d.listen(audio)
+  }
+
+  select (event: string) {
+    return O.fromDOM(this.audio, event)
+  }
+}
+
 export const dom = (node: VNode) => new DomPatch(node)
 export const request = (d: EventEmitter, url: string) => new Request(url, d)
 export const preventDefault = (ev: Event) => new PreventDefault(ev)
-export const play = (track: Track) => new PlayTrack(track)
+export const play = R.curry((audio: HTMLAudioElement, track: Track) => new PlayTrack(audio, track))
+export const audio = (events: EventEmitter) => new Audio(events)
