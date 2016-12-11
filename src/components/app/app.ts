@@ -10,7 +10,7 @@ import * as search from '../search-toolbar/search-toolbar'
 import * as t from '../../tasks'
 import * as toolbar from '../app-toolbar/app-toolbar'
 import * as trackList from '../track-list/track-list'
-import {dispatcher, select, from} from '../../dispatcher'
+import {dispatcher, select, from} from '../../events'
 import {h, TOKEN} from '../../lib'
 import {Model, EventEmitter, Task, Track, Reducer, ModalModel, AudioModel, ReducerLense} from '../../types'
 

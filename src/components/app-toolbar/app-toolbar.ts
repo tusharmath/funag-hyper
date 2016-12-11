@@ -6,7 +6,7 @@ import * as R from 'ramda'
 import {h} from '../../lib'
 import * as iconButton from '../icon-button/icon-button'
 import {EventEmitter} from '../../types'
-import {select} from '../../dispatcher'
+import {select} from '../../events'
 
 
 const showSearch = R.ifElse(

@@ -6,7 +6,7 @@ import * as R from 'ramda'
 import * as O from 'observable-air'
 import * as icon from '../icon-button/icon-button'
 import {EventEmitter, Model} from '../../types'
-import {select} from '../../dispatcher'
+import {select} from '../../events'
 
 export const view = (d: EventEmitter) => {
   return h('div.toolbar.search-toolbar', [

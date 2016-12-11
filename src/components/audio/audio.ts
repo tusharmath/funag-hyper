@@ -4,7 +4,7 @@
 import * as O from 'observable-air'
 import {h} from '../../lib'
 import {EventEmitter, AudioModel, MediaStatus} from '../../types'
-import {Action} from '../../dispatcher'
+import {Action} from '../../events'
 
 
 export const init = (): AudioModel => {

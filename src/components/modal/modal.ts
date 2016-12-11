@@ -6,7 +6,7 @@ import * as O from 'observable-air'
 import {h} from '../../lib'
 import {VNode} from 'snabbdom'
 import {EventEmitter, ModalModel} from '../../types'
-import {select} from '../../dispatcher'
+import {select} from '../../events'
 
 export const view = (d: EventEmitter, content: VNode | string, model: ModalModel) => {
   return model.hidden ? '' : h('div.modal', {

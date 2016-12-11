@@ -7,7 +7,7 @@ import {h} from '../../lib'
 import * as button from '../floating-button/floating-button'
 import {Track, EventEmitter} from '../../types'
 import * as artwork from '../artwork-large/artwork-large'
-import {select} from '../../dispatcher'
+import {select} from '../../events'
 
 export const view = (d: EventEmitter, track: Track) => {
   return h('div.track-modal-content', [
