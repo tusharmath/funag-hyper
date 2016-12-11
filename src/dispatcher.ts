@@ -14,7 +14,7 @@ export class Action<T> {
   }
 }
 
-export class RootDispatcher implements EventEmitter {
+export class RootEmitter implements EventEmitter {
   of (scope: string): EventEmitter {
     return this
   }
@@ -37,13 +37,13 @@ export class RootDispatcher implements EventEmitter {
   }
 }
 
-export class Dispatcher implements EventEmitter {
+export class ScopedEmitter implements EventEmitter {
   constructor (private scope: string, private parent: EventEmitter) {
     this.listen = this.listen.bind(this)
   }
 
   of (scope: string): EventEmitter {
-    return new Dispatcher(scope, this)
+    return new ScopedEmitter(scope, this)
   }
 
   listen <T> (val: T): void {
@@ -55,7 +55,7 @@ export class Dispatcher implements EventEmitter {
   }
 }
 
-export const dispatcher = (scope: string) => new Dispatcher(scope, new RootDispatcher())
+export const dispatcher = (scope: string) => new ScopedEmitter(scope, new RootEmitter())
 export const select = R.curry((source: O.Observable<Action<any>>, scope: string) => {
   return O.map(x => x.value, O.filter(x => x.type === scope, source))
 })
