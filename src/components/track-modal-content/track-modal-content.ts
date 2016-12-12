@@ -1,19 +1,39 @@
 /**
  * Created by tushar on 04/12/16.
  */
-import * as O from 'observable-air'
-import * as t from '../../tasks'
-import {h} from '../../lib'
-import * as button from '../floating-button/floating-button'
-import {Track, EventEmitter} from '../../types'
 import * as artwork from '../artwork-large/artwork-large'
+import * as button from '../floating-button/floating-button'
+import * as O from 'observable-air'
+import * as R from 'ramda'
+import * as t from '../../tasks'
+import {EventEmitter, TrackModalModel, MediaStatus} from '../../types'
+import {h} from '../../lib'
 import {select} from '../../events'
 
-export const view = (d: EventEmitter, track: Track) => {
+export const matchStatus = R.useWith(R.equals, [
+  R.identity,
+  R.path(['audio', 'status'])
+])
+
+export const icon = R.ifElse(
+  R.allPass([
+    R.anyPass([
+      matchStatus(MediaStatus.PLAYING),
+      matchStatus(MediaStatus.LOADING)
+    ]),
+    (model: TrackModalModel) => model.track === model.audio.track
+  ]),
+  R.always('pause'),
+  R.always('play_arrow')
+)
+
+export const view = (d: EventEmitter, model: TrackModalModel) => {
+  const track = model.track
+  const playEE = d.of('play')
   return h('div.track-modal-content', [
     artwork.view(track.artwork_url),
-    h('div.floating-button-container', {on: {click: [d.of('click').listen, track]}}, [
-      button.view('play_arrow')
+    h('div.floating-button-container', {on: {click: [playEE.listen, track]}}, [
+      button.view(icon(model), model.audio.status === MediaStatus.LOADING)
     ]),
     h('div.track-info', [
       h('div.header', [
@@ -23,7 +43,7 @@ export const view = (d: EventEmitter, track: Track) => {
         ])
       ]),
       h('div.menu-items', [
-        h('button', ['play']),
+        h('button', {on: {click: [playEE.listen, track]}}, ['play']),
         h('button', ['enqueue'])
       ])
     ])
@@ -31,6 +51,6 @@ export const view = (d: EventEmitter, track: Track) => {
 }
 
 export const tasks = (source: O.Observable<any>, audio$: O.Observable<HTMLAudioElement>) => {
-  const click$ = select(source, 'click')
-  return O.sample(t.play, click$, [click$, audio$])
+  const click$ = select(source, 'play')
+  return O.sample(t.play, click$, [audio$, click$])
 }

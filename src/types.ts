@@ -31,7 +31,8 @@ export interface Model {
   searchQuery: string,
   tracks: Array<Track>,
   selectedTrack?: Track,
-  modal: ModalModel
+  modal: ModalModel,
+  audio: AudioModel
 }
 
 export interface Task {
@@ -74,4 +75,9 @@ export interface AudioModel {
 
 export interface ReducerLense<A, B> {
   (r: Reducer<A>): Reducer<B>
+}
+
+export interface TrackModalModel {
+  track: Track
+  audio: AudioModel
 }

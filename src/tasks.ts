@@ -2,7 +2,6 @@
  * Created by tushar on 03/12/16.
  */
 import * as O from 'observable-air'
-import * as R from 'ramda'
 import {VNode} from 'snabbdom'
 import {Task, EventEmitter, Track} from './types'
 import {TOKEN} from './lib'
@@ -85,17 +84,16 @@ export class PlayTrack implements Task {
 }
 
 export class Audio implements Task {
-  private audio: HTMLAudioElement
+  private audio = document.createElement('audio') as HTMLAudioElement
 
   constructor (private d: EventEmitter) {
   }
 
   run (): void {
-    const audio = document.createElement('audio')
-    this.d.listen(audio)
+    this.d.listen(this.audio)
   }
 
-  select (event: string) {
+  events (event: string) {
     return O.fromDOM(this.audio, event)
   }
 }
@@ -103,5 +101,5 @@ export class Audio implements Task {
 export const dom = (node: VNode) => new DomPatch(node)
 export const request = (d: EventEmitter, url: string) => new Request(url, d)
 export const preventDefault = (ev: Event) => new PreventDefault(ev)
-export const play = R.curry((audio: HTMLAudioElement, track: Track) => new PlayTrack(audio, track))
+export const play = (audio: HTMLAudioElement, track: Track) => new PlayTrack(audio, track)
 export const audio = (events: EventEmitter) => new Audio(events)
