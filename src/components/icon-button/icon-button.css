@@ -6,4 +6,5 @@ button.icon-button {
   margin: 0;
   outline: none;
   background: none;
+  color: inherit;
 }

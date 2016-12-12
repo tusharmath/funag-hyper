@@ -7,14 +7,25 @@ import * as modalContent from '../track-modal-content/track-modal-content'
 import * as O from 'observable-air'
 import * as R from 'ramda'
 import * as search from '../search-toolbar/search-toolbar'
-import * as sideNav from '../drawer/drawer'
+import * as drawer from '../drawer/drawer'
 import * as t from '../../tasks'
 import {Audio} from '../../tasks'
 import * as toolbar from '../app-toolbar/app-toolbar'
 import * as trackList from '../track-list/track-list'
 import {dispatcher, select, from} from '../../events'
 import {h, TOKEN} from '../../lib'
-import {Model, EventEmitter, Task, Track, Reducer, ModalModel, ReducerLense, MediaStatus, AudioModel} from '../../types'
+import {
+  Model,
+  EventEmitter,
+  Task,
+  Track,
+  Reducer,
+  ModalModel,
+  ReducerLense,
+  MediaStatus,
+  AudioModel,
+  DrawerModel
+} from '../../types'
 
 const init = (): Model => ({
   showSearch: false,
@@ -24,7 +35,8 @@ const init = (): Model => ({
   modal: modal.init(),
   audio: {
     status: MediaStatus.PAUSED
-  }
+  },
+  drawer: drawer.init()
 })
 
 export const view = (d: EventEmitter, model: Model) => {
@@ -37,7 +49,7 @@ export const view = (d: EventEmitter, model: Model) => {
     model.showSearch ? search.view(d.of('searchBar')) : '',
     trackList.view(d, model.tracks),
     modal.view(d.of('modal'), content, model.modal),
-    sideNav.view()
+    drawer.view(d.of('drawer'), model.drawer)
   ])
 }
 export const searchQuery = R.compose(
@@ -57,6 +69,11 @@ export const update = (root$: O.Observable<any>, audioT: Audio) => {
     O.map(
       R.over(R.lensProp('audio')) as ReducerLense<AudioModel, Model>,
       audio.update(audioT)
+    ),
+
+    O.map(
+      R.over(R.lensProp('drawer')) as ReducerLense<DrawerModel, Model>,
+      drawer.update(actions('drawer'))
     ),
 
     O.map(

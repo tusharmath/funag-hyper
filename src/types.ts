@@ -32,7 +32,8 @@ export interface Model {
   tracks: Array<Track>,
   selectedTrack?: Track,
   modal: ModalModel,
-  audio: AudioModel
+  audio: AudioModel,
+  drawer: DrawerModel
 }
 
 export interface Task {
@@ -80,4 +81,8 @@ export interface ReducerLense<A, B> {
 export interface TrackModalModel {
   track: Track
   audio: AudioModel
+}
+
+export interface DrawerModel {
+  visible: boolean
 }

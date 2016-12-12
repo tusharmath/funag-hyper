@@ -16,9 +16,15 @@ const showSearch = R.ifElse(
 )
 
 export const update = (source: O.Observable<any>) => {
-  return O.map(
-    R.always(showSearch),
-    select(source, 'search')
+  return O.merge(
+    O.map(
+      R.always(showSearch),
+      select(source, 'search')
+    ),
+    O.map(
+      R.always(R.assocPath(['drawer', 'visible'], true)),
+      select(source, 'menu')
+    )
   )
 }
 

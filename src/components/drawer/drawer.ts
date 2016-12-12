@@ -1,13 +1,30 @@
 /**
  * Created by tushar on 12/12/16.
  */
+import * as icon from '../icon-button/icon-button'
+import * as O from 'observable-air'
+import * as R from 'ramda'
+import {Action, select} from '../../events'
+import {DrawerModel, EventEmitter} from '../../types'
 import {h} from '../../lib'
 
-export const view = () => {
-  return h('div.drawer', [
-    h('div.drawer-overlay'),
+export const init = (): DrawerModel => {
+  return {
+    visible: false
+  }
+}
+
+export const view = (ev: EventEmitter, model: DrawerModel) => {
+  const closeEV = ev.of('close')
+  return h('div.drawer', {class: {'drawer--show': model.visible}}, [
+    h('div.drawer-overlay', {on: {click: closeEV.listen}}),
     h('div.drawer-container', [
-      h('div.drawer-header', ['Tushar Mathur']),
+      h('div.drawer-header', [
+        h('div.drawer-close', [
+          icon.view('close', closeEV)
+        ]),
+        h('div', ['Tushar Mathur'])
+      ]),
       h('div.drawer-content', [
         h('button.drawer-nav-item', [
           h('i.material-icons', ['favorite_border']),
@@ -28,4 +45,12 @@ export const view = () => {
       ])
     ])
   ])
+}
+
+export const update = (source: O.Observable<Action<any>>) => {
+  const actions = select(source)
+  return O.map(
+    R.always(R.assoc('visible', false)),
+    actions('close')
+  )
 }
