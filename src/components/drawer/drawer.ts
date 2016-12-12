@@ -23,7 +23,7 @@ export const view = (ev: EventEmitter, model: DrawerModel) => {
         h('div.drawer-close', [
           icon.view('close', closeEV)
         ]),
-        h('div', ['Tushar Mathur'])
+        h('div.drawer-title', ['Tushar Mathur'])
       ]),
       h('div.drawer-content', [
         h('button.drawer-nav-item', [
