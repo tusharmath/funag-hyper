@@ -7,6 +7,7 @@ import * as modalContent from '../track-modal-content/track-modal-content'
 import * as O from 'observable-air'
 import * as R from 'ramda'
 import * as search from '../search-toolbar/search-toolbar'
+import * as sideNav from '../drawer/drawer'
 import * as t from '../../tasks'
 import {Audio} from '../../tasks'
 import * as toolbar from '../app-toolbar/app-toolbar'
@@ -35,7 +36,8 @@ export const view = (d: EventEmitter, model: Model) => {
     toolbar.view(d.of('toolbar')),
     model.showSearch ? search.view(d.of('searchBar')) : '',
     trackList.view(d, model.tracks),
-    modal.view(d.of('modal'), content, model.modal)
+    modal.view(d.of('modal'), content, model.modal),
+    sideNav.view()
   ])
 }
 export const searchQuery = R.compose(
