@@ -25,9 +25,9 @@ longest@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/longest/-/longest-1.0.1.tgz#30a0b2da38f73770e8294a0d22e6625ed77d0097"
 
-observable-air@^1.22.0:
-  version "1.23.0"
-  resolved "https://registry.yarnpkg.com/observable-air/-/observable-air-1.23.0.tgz#15d367ecf2e750084aefdcfbbd4f65ff791f029b"
+observable-air@^1.23.1:
+  version "1.23.1"
+  resolved "https://registry.yarnpkg.com/observable-air/-/observable-air-1.23.1.tgz#872647fddb308675cd9b07ea239ca34819c8029e"
 
 pad-right@^0.2.2:
   version "0.2.2"
