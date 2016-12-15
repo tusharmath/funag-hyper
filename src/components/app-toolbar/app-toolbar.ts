@@ -22,7 +22,7 @@ export const update = (source: O.Observable<any>) => {
       select(source, 'search')
     ),
     O.map(
-      R.always(R.assocPath(['drawer', 'visible'], true)),
+      R.always(R.assocPath(['drawer', 'completion'], 0)),
       select(source, 'menu')
     )
   )

@@ -118,7 +118,7 @@ export function main (D: EventEmitter): O.Observable<Task> {
 
   // Log Actions
   // O.forEach(x => console.log(x), root$)
-  O.forEach(x => console.log(x), model$)
+  // O.forEach(x => console.log(x), model$)
 
   // Tasks
   const actions = select(root$)
@@ -126,6 +126,7 @@ export function main (D: EventEmitter): O.Observable<Task> {
     O.map(model => t.dom(view(D, model)), model$),
     O.map(requestTracks(D), searchQuery(model$)),
     modalContent.tasks(actions('modalContent'), actions('audio')),
+    drawer.tasks(actions('drawer')),
     O.of(audioT)
   )
 }

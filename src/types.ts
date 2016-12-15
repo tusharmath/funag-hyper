@@ -3,6 +3,7 @@
  */
 import {VNode} from 'snabbdom'
 import * as O from 'observable-air'
+import {Action} from './events'
 
 export interface VNodeProps {
   attrs?: {[name: string]: string},
@@ -77,6 +78,9 @@ export interface AudioModel {
 export interface ReducerLense<A, B> {
   (r: Reducer<A>): Reducer<B>
 }
+export interface ActionReducer<A, R> {
+  (a: Action<A>): Reducer<R>
+}
 
 export interface TrackModalModel {
   track: Track
@@ -84,5 +88,8 @@ export interface TrackModalModel {
 }
 
 export interface DrawerModel {
-  visible: boolean
+  touchStart: number
+  width: number
+  isMoving: boolean
+  completion: number
 }

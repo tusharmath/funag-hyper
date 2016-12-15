@@ -16,3 +16,4 @@ export const durationFormat = (time: number) => {
   return `${mins}:${secs.toString().length < 2 ? secs + '0' : secs}`
 }
 export const TOKEN = '1862b9bf02ed7c80d0f545f835ad8773'
+export const clientX = (touch: TouchEvent) => touch.changedTouches[0].clientX

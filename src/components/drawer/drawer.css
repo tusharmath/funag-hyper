@@ -6,16 +6,13 @@
   pointer-events: none;
 }
 
-.drawer--show {
+.drawer--active {
   pointer-events: auto;
 }
 
-.drawer--show .drawer-overlay {
-  opacity: 1;
-}
-
-.drawer--show .drawer-container {
-  transform: translateX(0);
+.drawer--no-anime .drawer-container {
+  transition: none;
+  will-change: transform;
 }
 
 .drawer-overlay {
@@ -23,7 +20,6 @@
   background-color: rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;
-  opacity: 0;
   transition: opacity 300ms cubic-bezier(0, 0, 0, 1.5);
 }
 
@@ -38,7 +34,6 @@
   box-shadow: 0px 0px 12px 1px #000;
   display: flex;
   flex-direction: column;
-  transform: translateX(-104%);
   transition: transform 300ms cubic-bezier(0, 0, 0, 1.5);
 }
 
