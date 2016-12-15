@@ -10,12 +10,12 @@ import {select} from '../../events'
 
 export const view = (d: EventEmitter, content: VNode | string, model: ModalModel) => {
   return model.hidden ? '' : h('div.modal', {
-    'class': {'animate-out': model.hide},
-    on: {animationend: d.of('animationEnd').listen}
-  }, [
-    h('div.overlay', {on: {click: d.of('click').listen}}),
-    h('div.content', [content])
-  ])
+      'class': {'animate-out': model.hide},
+      on: {animationend: d.of('animationEnd').listen}
+    }, [
+      h('div.modal-overlay', {on: {click: d.of('click').listen}}),
+      h('div.modal-content', [content])
+    ])
 }
 
 export const init = (isVisible = false): ModalModel => ({
@@ -33,11 +33,9 @@ const mergeR = R.flip(R.merge)
 
 export const update = (source$: O.Observable<any>, show$: O.Observable<any>) => {
   const actions = select(source$)
-  const overlayClick$ = actions('click')
   const animationEnd$ = animationEnd(actions('animationEnd'))
-
   return O.merge(
-    O.map(R.always(mergeR({hide: true, hidden: false})), overlayClick$),
+    O.map(R.always(mergeR({hide: true, hidden: false})), actions('click')),
     O.map(R.always(mergeR({hide: false, hidden: false})), show$),
     O.map(R.always(
       R.ifElse(

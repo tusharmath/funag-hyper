@@ -1,14 +1,22 @@
-.modal .content {
+.modal {
   position: fixed;
-  bottom: 0;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.modal-content {
   background-color: rgb(255, 255, 255);
   width: 100%;
   box-shadow: 0px -8px 24px -3px rgb(0, 0, 0);
   animation: bouncy-modal 400ms linear;
+  position: absolute;
 }
 
-.modal .overlay {
-  position: fixed;
+.modal-overlay {
+  position: absolute;
   top: 0;
   background: rgba(0, 0, 0, 0.5);
   height: 100%;
@@ -28,11 +36,11 @@
   outline: none;
 }
 
-.modal.animate-out .overlay {
+.modal.animate-out .modal-overlay {
   animation: overlay-fade-out 400ms cubic-bezier(0.6, -0.28, 0.74, 0.05);
 }
 
-.modal.animate-out .content {
+.modal.animate-out .modal-content {
   animation: modal-swipe-out 400ms cubic-bezier(0.6, -0.28, 0.74, 0.05);
 }
 
