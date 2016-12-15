@@ -25,7 +25,7 @@ export const view = (ev: EventEmitter, model: DrawerModel, children: VNode[]) =>
   const closeEV = ev.of('close')
   return h('div.drawer', {
     on: {
-      touchstart: ev.of('start').listen,
+      touchstart: ev.of('touchStart').listen,
       touchmove: ev.of('touchMove').listen,
       touchend: ev.of('touchEnd').listen
     },
@@ -77,7 +77,7 @@ export const update = (source: O.Observable<Action<any>>) => {
         const length = getTargetWidth(touch)
         return R.merge(model, {isMoving: true, start: xPos, length})
       }) as {(touch: TouchEvent): Reducer<DrawerModel>},
-      actions('start')
+      actions('touchStart')
     ),
     O.map(
       R.always(R.assoc('completion', MAX_COMPLETION)),
