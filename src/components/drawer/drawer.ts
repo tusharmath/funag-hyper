@@ -74,7 +74,7 @@ export const update = (source: O.Observable<Action<any>>) => {
     O.map(
       R.curry((touch: TouchEvent, model: DrawerModel) => {
         const xPos = clientX(touch)
-        const length = getTargetWidth(touch)
+        const length = getTargetWidth(touch, '.drawer-container')
         return R.merge(model, {isMoving: true, start: xPos, length})
       }) as {(touch: TouchEvent): Reducer<DrawerModel>},
       actions('touchStart')
