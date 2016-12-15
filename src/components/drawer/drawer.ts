@@ -9,6 +9,7 @@ import * as R from 'ramda'
 import {Action, select} from '../../events'
 import {DrawerModel, EventEmitter, Reducer} from '../../types'
 import {h, clientX} from '../../lib'
+import {VNode} from 'snabbdom'
 
 export const MAX_COMPLETION = 104
 export const init = (): DrawerModel => {
@@ -20,7 +21,7 @@ export const init = (): DrawerModel => {
   }
 }
 
-export const view = (ev: EventEmitter, model: DrawerModel) => {
+export const view = (ev: EventEmitter, model: DrawerModel, children: VNode[]) => {
   const closeEV = ev.of('close')
   return h('div.drawer', {
     on: {
@@ -46,24 +47,7 @@ export const view = (ev: EventEmitter, model: DrawerModel) => {
         ]),
         h('div.drawer-title', ['Tushar Mathur'])
       ]),
-      h('div.drawer-content', [
-        h('button.drawer-nav-item', [
-          h('i.material-icons', ['favorite_border']),
-          h('span.drawer-nav-item-title', ['Favourites'])
-        ]),
-        h('button.drawer-nav-item', [
-          h('i.material-icons', ['queue_music']),
-          h('span.drawer-nav-item-title', ['Playlists'])
-        ]),
-        h('button.drawer-nav-item', [
-          h('i.material-icons', ['face']),
-          h('span.drawer-nav-item-title', ['Me'])
-        ]),
-        h('button.drawer-nav-item', [
-          h('i.material-icons', ['settings']),
-          h('span.drawer-nav-item-title', ['Settings'])
-        ])
-      ])
+      h('div.drawer-content', children)
     ])
   ])
 }

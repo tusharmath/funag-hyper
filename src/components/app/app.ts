@@ -2,30 +2,20 @@
  * Created by tushar on 03/12/16.
  */
 import * as audio from '../audio/audio'
+import * as drawer from '../drawer/drawer'
+import * as drawerContent from '../drawer-content/drawer-content'
 import * as modal from '../modal/modal'
 import * as modalContent from '../track-modal-content/track-modal-content'
 import * as O from 'observable-air'
 import * as R from 'ramda'
 import * as search from '../search-toolbar/search-toolbar'
-import * as drawer from '../drawer/drawer'
 import * as t from '../../tasks'
 import {Audio} from '../../tasks'
 import * as toolbar from '../app-toolbar/app-toolbar'
 import * as trackList from '../track-list/track-list'
 import {dispatcher, select, from} from '../../events'
 import {h, TOKEN} from '../../lib'
-import {
-  Model,
-  EventEmitter,
-  Task,
-  Track,
-  Reducer,
-  ModalModel,
-  ReducerLense,
-  MediaStatus,
-  AudioModel,
-  DrawerModel
-} from '../../types'
+import {Model, EventEmitter, Task, Track, Reducer, ModalModel, ReducerLense, MediaStatus, AudioModel, DrawerModel} from '../../types'
 
 const init = (): Model => ({
   showSearch: false,
@@ -41,15 +31,15 @@ const init = (): Model => ({
 
 export const view = (d: EventEmitter, model: Model) => {
   const content = !model.selectedTrack ? '' : modalContent.view(
-    d.of('modalContent'),
-    {track: model.selectedTrack, audio: model.audio}
-  )
+      d.of('modalContent'),
+      {track: model.selectedTrack, audio: model.audio}
+    )
   return h('div.app', [
     toolbar.view(d.of('toolbar')),
     model.showSearch ? search.view(d.of('searchBar')) : '',
     trackList.view(d, model.tracks),
     modal.view(d.of('modal'), content, model.modal),
-    drawer.view(d.of('drawer'), model.drawer)
+    drawer.view(d.of('drawer'), model.drawer, drawerContent.view())
   ])
 }
 export const searchQuery = R.compose(
