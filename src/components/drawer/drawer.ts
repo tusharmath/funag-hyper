@@ -34,7 +34,7 @@ export const view = (ev: EventEmitter, model: DrawerModel) => {
     }
   }, [
     h('div.drawer-overlay', {
-      style: {opacity: model.completion < MAX_COMPLETION ? '1' : '0'},
+      style: {opacity: `${(MAX_COMPLETION - model.completion) / 100}`},
       on: {click: closeEV.listen}
     }),
     h('div.drawer-container', {
