@@ -61,6 +61,13 @@ export interface Reducer<T> {
   (m: T): T
 }
 
+export interface Draggable {
+  completion: number
+  start: number
+  isMoving: boolean
+  length: number
+}
+
 export interface ModalModel {
   hide: boolean
   hidden: boolean
@@ -87,9 +94,5 @@ export interface TrackModalModel {
   audio: AudioModel
 }
 
-export interface DrawerModel {
-  touchStart: number
-  width: number
-  isMoving: boolean
-  completion: number
+export interface DrawerModel extends Draggable {
 }

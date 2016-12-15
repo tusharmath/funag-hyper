@@ -8,15 +8,15 @@ import * as Oe from 'observable-air/extra'
 import * as R from 'ramda'
 import {Action, select} from '../../events'
 import {DrawerModel, EventEmitter, Reducer} from '../../types'
-import {h, clientX} from '../../lib'
+import {h, clientX, getTargetWidth} from '../../lib'
 import {VNode} from 'snabbdom'
 
 export const MAX_COMPLETION = 104
 export const init = (): DrawerModel => {
   return {
-    touchStart: 0,
+    start: 0,
     completion: MAX_COMPLETION,
-    width: -1,
+    length: -1,
     isMoving: false
   }
 }
@@ -25,7 +25,7 @@ export const view = (ev: EventEmitter, model: DrawerModel, children: VNode[]) =>
   const closeEV = ev.of('close')
   return h('div.drawer', {
     on: {
-      touchstart: ev.of('touchStart').listen,
+      touchstart: ev.of('start').listen,
       touchmove: ev.of('touchMove').listen,
       touchend: ev.of('touchEnd').listen
     },
@@ -52,8 +52,7 @@ export const view = (ev: EventEmitter, model: DrawerModel, children: VNode[]) =>
   ])
 }
 export const resetCompletion = (model: DrawerModel) => model.completion > 50 ? MAX_COMPLETION : 0
-export const currentCompletion = (model: DrawerModel, touch: TouchEvent) => (model.touchStart - clientX(touch)) / model.width * 100
-export const getTargetWidth = (ev: Event) => (ev.target as HTMLElement).getBoundingClientRect().width
+export const currentCompletion = (model: DrawerModel, touch: TouchEvent) => (model.start - clientX(touch)) / model.length * 100
 
 export const update = (source: O.Observable<Action<any>>) => {
   const actions = select(source)
@@ -75,10 +74,10 @@ export const update = (source: O.Observable<Action<any>>) => {
     O.map(
       R.curry((touch: TouchEvent, model: DrawerModel) => {
         const xPos = clientX(touch)
-        const width = getTargetWidth(touch)
-        return R.merge(model, {isMoving: true, touchStart: xPos, touchMove: xPos, width})
+        const length = getTargetWidth(touch)
+        return R.merge(model, {isMoving: true, start: xPos, length})
       }) as {(touch: TouchEvent): Reducer<DrawerModel>},
-      actions('touchStart')
+      actions('start')
     ),
     O.map(
       R.always(R.assoc('completion', MAX_COMPLETION)),
