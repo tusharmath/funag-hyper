@@ -68,9 +68,7 @@ export interface Draggable {
   length: number
 }
 
-export interface ModalModel {
-  hide: boolean
-  hidden: boolean
+export interface ModalModel extends Draggable {
 }
 
 export enum MediaStatus {

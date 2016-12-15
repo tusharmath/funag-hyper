@@ -78,7 +78,7 @@ export const update = (root$: O.Observable<any>, audioT: Audio) => {
 
     O.map(
       R.over(R.lensProp('modal')) as ReducerLense<ModalModel, Model>,
-      modal.update(actions('modal'), actions('selectTrack'))
+      modal.update(actions('modal'))
     ),
 
     O.map(
@@ -88,6 +88,11 @@ export const update = (root$: O.Observable<any>, audioT: Audio) => {
 
     O.map(
       R.assoc('selectedTrack') as {(track: Track): Reducer<Model>},
+      actions('selectTrack')
+    ),
+
+    O.map(
+      R.always(R.assocPath(['modal', 'completion'], 0)),
       actions('selectTrack')
     )
   )
@@ -117,6 +122,7 @@ export function main (D: EventEmitter): O.Observable<Task> {
     O.map(requestTracks(D), searchQuery(model$)),
     modalContent.tasks(actions('modalContent'), actions('audio')),
     drawer.tasks(actions('drawer')),
+    modal.tasks(actions('modal')),
     O.of(audioT)
   )
 }
