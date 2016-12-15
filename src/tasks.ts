@@ -15,7 +15,7 @@ const patch = snabbdom.init([
 ])
 
 export class DomPatch implements Task {
-  static node = document.getElementById('app')
+  static node: HTMLElement
   private __node: VNode
 
   constructor (node: VNode) {
@@ -23,7 +23,7 @@ export class DomPatch implements Task {
   }
 
   run () {
-    DomPatch.node = patch(DomPatch.node, this.__node)
+    DomPatch.node = patch(DomPatch.node || document.getElementById('app'), this.__node)
   }
 }
 
