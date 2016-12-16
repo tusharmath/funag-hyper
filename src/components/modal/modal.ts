@@ -4,10 +4,9 @@
 import * as O from 'observable-air'
 import * as R from 'ramda'
 import * as t from '../../tasks'
-import {EventEmitter, ModalModel, Reducer} from '../../types'
+import {EventEmitter, ModalModel, Reducer, VNode} from '../../types'
 import {h, clientY, getTargetHeight} from '../../lib'
 import {select} from '../../events'
-import {VNode} from 'snabbdom'
 
 export const MAX_COMPLETION = 104
 export const currentCompletion = (model: ModalModel, touch: TouchEvent) => (clientY(touch) - model.start) / model.length * 100

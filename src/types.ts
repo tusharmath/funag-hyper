@@ -1,9 +1,11 @@
 /**
  * Created by tushar on 03/12/16.
  */
-import {VNode} from 'snabbdom'
 import * as O from 'observable-air'
 import {Action} from './events'
+
+export interface VNode {
+}
 
 export interface VNodeProps {
   attrs?: {[name: string]: string},

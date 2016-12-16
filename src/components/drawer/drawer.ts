@@ -7,9 +7,8 @@ import * as O from 'observable-air'
 import * as Oe from 'observable-air/extra'
 import * as R from 'ramda'
 import {Action, select} from '../../events'
-import {DrawerModel, EventEmitter, Reducer} from '../../types'
+import {DrawerModel, EventEmitter, Reducer, VNode} from '../../types'
 import {h, clientX, getTargetWidth} from '../../lib'
-import {VNode} from 'snabbdom'
 
 export const MAX_COMPLETION = 104
 export const init = (): DrawerModel => {

@@ -18,10 +18,12 @@ export const durationFormat = (time: number) => {
 export const TOKEN = '1862b9bf02ed7c80d0f545f835ad8773'
 export const clientX = (touch: TouchEvent) => touch.changedTouches[0].clientX
 export const clientY = (touch: TouchEvent) => touch.changedTouches[0].clientY
-export const getTargetWidth = (ev: Event, selector: string) => (ev.currentTarget as HTMLElement)
-  .querySelector(selector)
-  .getBoundingClientRect().width
-
-export const getTargetHeight = (ev: Event, selector: string) => (ev.currentTarget as HTMLElement)
-  .querySelector(selector)
-  .getBoundingClientRect().height
+export const querySelector = (el: HTMLElement, selector: string) => el.querySelector(selector)
+export const getTargetWidth = (ev: Event, selector: string) => {
+  const el = querySelector(ev.currentTarget as HTMLElement, selector)
+  return el ? el.getBoundingClientRect().width : 0
+}
+export const getTargetHeight = (ev: Event, selector: string) => {
+  const el = querySelector(ev.currentTarget as HTMLElement, selector)
+  return el ? el.getBoundingClientRect().height : 0
+}

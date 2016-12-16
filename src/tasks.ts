@@ -2,8 +2,7 @@
  * Created by tushar on 03/12/16.
  */
 import * as O from 'observable-air'
-import {VNode} from 'snabbdom'
-import {Task, EventEmitter, Track} from './types'
+import {Task, EventEmitter, Track, VNode} from './types'
 import {TOKEN} from './lib'
 const snabbdom = require('snabbdom')
 
