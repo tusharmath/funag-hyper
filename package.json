@@ -11,9 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "observable-air": "^1.23.1",
-    "ramda": "^0.22.1",
-    "snabbdom": "^0.5.4",
-    "systemjs": "^0.19.41"
+    "ramda": "^0.23.0",
+    "snabbdom": "^0.6.3",
+    "systemjs": "^0.20.0"
   },
   "devDependencies": {
     "cz-conventional-changelog": "^1.2.0",
