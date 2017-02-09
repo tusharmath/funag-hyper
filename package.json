@@ -12,7 +12,7 @@
   "dependencies": {
     "observable-air": "^1.23.1",
     "ramda": "^0.22.1",
-    "snabbdom": "^0.5.4",
+    "snabbdom": "^0.6.4",
     "systemjs": "^0.19.41"
   },
   "devDependencies": {
