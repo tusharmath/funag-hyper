@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "observable-air": "^1.23.1",
+    "observable-air": "^1.30.0",
     "ramda": "^0.22.1",
     "snabbdom": "^0.5.4",
     "systemjs": "^0.19.41"
