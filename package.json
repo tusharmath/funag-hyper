@@ -13,7 +13,7 @@
     "observable-air": "^1.23.1",
     "ramda": "^0.22.1",
     "snabbdom": "^0.5.4",
-    "systemjs": "^0.19.41"
+    "systemjs": "^0.20.12"
   },
   "devDependencies": {
     "cz-conventional-changelog": "^1.2.0",
