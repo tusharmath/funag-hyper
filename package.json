@@ -10,13 +10,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "observable-air": "^1.23.1",
-    "ramda": "^0.22.1",
-    "snabbdom": "^0.5.4",
-    "systemjs": "^0.19.41"
+    "observable-air": "^4.2.2",
+    "ramda": "^0.24.0",
+    "snabbdom": "^0.6.9",
+    "systemjs": "^0.20.12"
   },
   "devDependencies": {
-    "cz-conventional-changelog": "^1.2.0",
+    "cz-conventional-changelog": "^2.0.0",
     "typescript": "^2.1.4"
   },
   "config": {
